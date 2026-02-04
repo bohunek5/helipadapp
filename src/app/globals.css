@@ -2,6 +2,7 @@
 
 :root {
   --background: #ffffff;
+  /* STRICT WHITE */
   --foreground: #020617;
   --primary: #0ea5e9;
   --primary-glow: rgba(14, 165, 233, 0.2);

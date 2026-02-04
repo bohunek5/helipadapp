@@ -1,66 +1,35 @@
 "use client";
 
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import {
-  Menu, X, Sun, Moon,
   Activity
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRef, useState, useEffect } from "react";
+import { useRef } from "react";
 import PageTransition from "@/components/PageTransition";
 
 // --- HELPERS ---
 const getImagePath = (path: string) => `/helipadapp${path}`;
 
-// --- TRANSLATIONS ---
+// --- TRANSLATIONS (Only for Hero content) ---
 const translations = {
   pl: {
-    nav: [
-      { label: "START", href: "/" },
-      { label: "O NAS", href: "/about" },
-      { label: "CENNIK", href: "/pricing" },
-      { label: "GALERIA", href: "/gallery" },
-      { label: "KONTAKT", href: "/contact" }
-    ],
     status: "STATUS: AKTYWNY",
-    coords_label: "WSPÓŁRZĘDNE",
-    radio_label: "RADIO",
-    elev_label: "ELEWACJA",
     hero_title: "HELIPAD MAZURY",
     hero_subtitle: "ZAAWANSOWANA INFRASTRUKTURA LOTNICZA",
     hero_btn: "ROZPOCZNIJ PROCEDURĘ",
     hero_specs: "DANE TECHNICZNE"
   },
   en: {
-    nav: [
-      { label: "HOME", href: "/" },
-      { label: "ABOUT", href: "/about" },
-      { label: "PRICING", href: "/pricing" },
-      { label: "GALLERY", href: "/gallery" },
-      { label: "CONTACT", href: "/contact" }
-    ],
     status: "STATUS: ACTIVE",
-    coords_label: "COORDINATES",
-    radio_label: "RADIO FREQ",
-    elev_label: "ELEVATION",
     hero_title: "HELIPAD MAZURY",
     hero_subtitle: "ADVANCED AVIATION INFRASTRUCTURE",
     hero_btn: "INITIATE PROCEDURE",
     hero_specs: "TECHNICAL DATA"
   },
   de: {
-    nav: [
-      { label: "START", href: "/" },
-      { label: "ÜBER UNS", href: "/about" },
-      { label: "PREISE", href: "/pricing" },
-      { label: "GALERIE", href: "/gallery" },
-      { label: "KONTAKT", href: "/contact" }
-    ],
     status: "STATUS: AKTIV",
-    coords_label: "KOORDINATEN",
-    radio_label: "FUNKFREQUENZ",
-    elev_label: "HÖHE",
     hero_title: "HELIPAD MASUREN",
     hero_subtitle: "FORTSCHRITTLICHE LUFTFAHRTINFRASTRUKTUR",
     hero_btn: "VERFAHREN STARTEN",
@@ -70,36 +39,16 @@ const translations = {
 
 export default function Home() {
   const containerRef = useRef(null);
-  const [lang, setLang] = useState<"pl" | "en" | "de">("pl");
-  const [theme, setTheme] = useState<"light" | "dark">("light");
-  const [mobileMenu, setMobileMenu] = useState(false);
-
-  // Initialize state from local storage
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const savedLang = localStorage.getItem('lang') as "pl" | "en" | "de";
-      const savedTheme = localStorage.getItem('theme') as "light" | "dark";
-      if (savedLang) setLang((prev) => savedLang !== prev ? savedLang : prev);
-      if (savedTheme) setTheme((prev) => savedTheme !== prev ? savedTheme : prev);
-    }
-  }, []);
-
-  useEffect(() => {
-    document.documentElement.classList.toggle('dark', theme === 'dark');
-    localStorage.setItem('theme', theme);
-  }, [theme]);
-
-  useEffect(() => {
-    localStorage.setItem('lang', lang);
-  }, [lang]);
-
+  // Default to PL for Hero content as translation state is now in Navbar (could utilize context later for global lang sync)
+  const lang = "pl";
   const t = translations[lang];
+
   const { scrollYProgress } = useScroll({ target: containerRef });
   const yParallax = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
 
   return (
     <PageTransition>
-      <main ref={containerRef} className="bg-slate-50 dark:bg-[#030712] min-h-screen font-inter transition-colors duration-500 overflow-x-hidden selection:bg-sky-500 selection:text-white">
+      <main ref={containerRef} className="bg-white dark:bg-[#030712] min-h-screen font-inter transition-colors duration-500 overflow-x-hidden selection:bg-sky-500 selection:text-white">
 
         {/* --- HUD OVERLAY (Fixed) --- */}
         <div className="fixed inset-0 pointer-events-none z-50 mix-blend-overlay opacity-30 dark:opacity-20 hidden lg:block">
@@ -114,70 +63,12 @@ export default function Home() {
           </div>
         </div>
 
-        {/* --- NAVIGATION (Glass Tech) --- */}
-        <nav className="fixed top-0 w-full z-[100] px-6 py-4 flex justify-between items-center backdrop-blur-md bg-white/70 dark:bg-[#030712]/70 border-b border-slate-200 dark:border-white/10">
-          <div className="flex items-center gap-4">
-            <div className="relative w-10 h-10 bg-sky-600 rounded flex items-center justify-center shadow-[0_0_15px_rgba(14,165,233,0.5)]">
-              <span className="font-space font-bold text-white tracking-tighter">HM</span>
-            </div>
-            <div className="hidden md:flex flex-col">
-              <span className="font-space font-bold text-sm tracking-[0.2em] text-slate-900 dark:text-white leading-none">HELIPAD</span>
-              <span className="font-mono text-[10px] text-sky-600 dark:text-sky-400 tracking-widest">EPGH SYSTEM</span>
-            </div>
-          </div>
-
-          <div className="hidden lg:flex items-center gap-1 bg-slate-100 dark:bg-white/5 p-1 rounded-lg border border-slate-200 dark:border-white/10">
-            {t.nav.map((item, i) => (
-              <Link key={i} href={item.href}
-                className="px-5 py-2 text-[10px] font-space font-bold tracking-widest text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-white dark:hover:bg-white/10 rounded transition-all">
-                {item.label}
-              </Link>
-            ))}
-          </div>
-
-          <div className="flex items-center gap-4">
-            <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')} className="p-2 text-slate-500 dark:text-slate-400 hover:text-sky-600 transition-colors">
-              {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
-            </button>
-            <div className="h-6 w-[1px] bg-slate-300 dark:bg-white/20" />
-            <button onClick={() => setLang(lang === 'pl' ? 'en' : 'pl')} className="font-mono text-xs font-bold text-slate-900 dark:text-white uppercase">
-              {lang}
-            </button>
-            <button onClick={() => setMobileMenu(true)} className="lg:hidden p-2 text-slate-900 dark:text-white">
-              <Menu size={24} />
-            </button>
-            <Link href="/contact" className="hidden md:flex items-center gap-2 px-6 py-2 bg-slate-900 dark:bg-white text-white dark:text-black font-space font-bold text-xs tracking-widest uppercase hover:bg-sky-600 dark:hover:bg-sky-400 transition-colors">
-              <span>{lang === 'pl' ? 'REZERWUJ' : 'BOOK'}</span>
-              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-            </Link>
-          </div>
-        </nav>
-
-        {/* --- MOBILE MENU --- */}
-        <AnimatePresence>
-          {mobileMenu && (
-            <motion.div initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }} className="fixed inset-0 z-[200] bg-white dark:bg-[#0b0f19] flex flex-col p-8">
-              <div className="flex justify-between items-center mb-12">
-                <span className="font-space font-bold text-2xl dark:text-white">MENU</span>
-                <button onClick={() => setMobileMenu(false)}><X size={32} className="dark:text-white" /></button>
-              </div>
-              <div className="flex flex-col gap-6">
-                {t.nav.map((item, i) => (
-                  <Link key={i} href={item.href} onClick={() => setMobileMenu(false)} className="text-4xl font-space font-bold text-slate-900 dark:text-white/80 hover:text-sky-500 uppercase tracking-tight">
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
         {/* --- HERO (HUD COCKPIT) --- */}
         <section className="relative h-screen flex items-center justify-center overflow-hidden">
           {/* Parallax Background */}
           <motion.div style={{ y: yParallax }} className="absolute inset-0 z-0">
             <Image src={getImagePath("/images/real_aerial.jpg")} alt="Aerial View" fill className="object-cover opacity-90 dark:opacity-60 saturate-0 dark:saturate-[0.2] contrast-125 transition-all duration-700" priority />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-50 dark:from-[#030712] via-slate-50/50 dark:via-[#030712]/50 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-white dark:from-[#030712] via-white/50 dark:via-[#030712]/50 to-transparent" />
           </motion.div>
 
           {/* HUD Elements */}
