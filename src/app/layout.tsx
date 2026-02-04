@@ -6,8 +6,8 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
 
 export const metadata: Metadata = {
-  title: "Helipad Giżycko 2026 | EPGH Aviation Port",
-  description: "Breathtaking views, premium safety, and futuristic aviation services in the heart of Mazury.",
+  title: "Helipad Giżycko 2026 | Port Lotniczy EPGH",
+  description: "Zapierające dech w piersiach widoki, najwyższe bezpieczeństwo i futurystyczne usługi lotnicze w sercu Mazur.",
 };
 
 export default function RootLayout({
@@ -28,20 +28,20 @@ export default function RootLayout({
           </div>
 
           <div className="hidden lg:flex gap-10 text-xs font-black tracking-widest text-[#334155]">
-            <a href="/" className="hover:text-sky-600 transition-all border-b-2 border-transparent hover:border-sky-500 pb-1">HOME</a>
-            <a href="#about" className="hover:text-sky-600 transition-all border-b-2 border-transparent hover:border-sky-500 pb-1">ABOUT</a>
-            <a href="#services" className="hover:text-sky-600 transition-all border-b-2 border-transparent hover:border-sky-500 pb-1">PRICING</a>
-            <a href="#gallery" className="hover:text-sky-600 transition-all border-b-2 border-transparent hover:border-sky-500 pb-1">GALLERY</a>
-            <a href="#contact" className="hover:text-sky-600 transition-all border-b-2 border-transparent hover:border-sky-500 pb-1">CONTACT</a>
+            <a href="/helipadapp/" className="hover:text-sky-600 transition-all border-b-2 border-transparent hover:border-sky-500 pb-1">START</a>
+            <a href="#about" className="hover:text-sky-600 transition-all border-b-2 border-transparent hover:border-sky-500 pb-1">O NAS</a>
+            <a href="#services" className="hover:text-sky-600 transition-all border-b-2 border-transparent hover:border-sky-500 pb-1">CENNIK</a>
+            <a href="#gallery" className="hover:text-sky-600 transition-all border-b-2 border-transparent hover:border-sky-500 pb-1">GALERIA</a>
+            <a href="#contact" className="hover:text-sky-600 transition-all border-b-2 border-transparent hover:border-sky-500 pb-1">KONTAKT</a>
           </div>
 
           <div className="flex items-center gap-4">
             <button className="hidden sm:block text-[11px] font-black tracking-widest text-slate-500 hover:text-sky-600 transition-colors">
               PL / EN
             </button>
-            <button className="px-6 py-3 rounded-full bg-slate-900 text-white font-black text-[11px] tracking-widest hover:bg-sky-600 hover:scale-105 active:scale-95 transition-all shadow-xl shadow-slate-200">
-              BOOK NOW
-            </button>
+            <a href="#booking" className="px-6 py-3 rounded-full bg-slate-900 text-white font-black text-[11px] tracking-widest hover:bg-sky-600 hover:scale-105 active:scale-95 transition-all shadow-xl shadow-slate-200">
+              REZERWUJ
+            </a>
           </div>
         </nav>
 
@@ -55,24 +55,24 @@ export default function RootLayout({
                 <span className="font-outfit font-black text-xl gradient-text-azure">HELIPAD</span>
               </div>
               <p className="text-slate-400 text-sm leading-relaxed">
-                The most advanced helicopter landing infrastructure in northern Poland. Setting the standard for 2026.
+                Najbardziej zaawansowana infrastruktura dla śmigłowców w północnej Polsce. Standard roku 2026.
               </p>
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-12">
               <div>
-                <h5 className="font-black text-xs tracking-widest mb-6">SERVICES</h5>
+                <h5 className="font-black text-xs tracking-widest mb-6">USŁUGI</h5>
                 <ul className="text-sm text-slate-500 space-y-3 font-medium">
-                  <li><a href="#" className="hover:text-sky-600 transition-colors">Day Landing</a></li>
-                  <li><a href="#" className="hover:text-sky-600 transition-colors">Night Landing</a></li>
-                  <li><a href="#" className="hover:text-sky-600 transition-colors">Hangarage</a></li>
+                  <li><a href="#services" className="hover:text-sky-600 transition-colors">Lądowanie Dzień</a></li>
+                  <li><a href="#services" className="hover:text-sky-600 transition-colors">Lądowanie Noc</a></li>
+                  <li><a href="#services" className="hover:text-sky-600 transition-colors">Hangarowanie</a></li>
                 </ul>
               </div>
               <div>
-                <h5 className="font-black text-xs tracking-widest mb-6">LEGAL</h5>
+                <h5 className="font-black text-xs tracking-widest mb-6">LEGALNE</h5>
                 <ul className="text-sm text-slate-500 space-y-3 font-medium">
-                  <li><a href="#" className="hover:text-sky-600 transition-colors">Safety Rules</a></li>
-                  <li><a href="#" className="hover:text-sky-600 transition-colors">Privacy Policy</a></li>
-                  <li><a href="#" className="hover:text-sky-600 transition-colors">Terms of Use</a></li>
+                  <li><a href="#" className="hover:text-sky-600 transition-colors">Zasady Bezpieczeństwa</a></li>
+                  <li><a href="#" className="hover:text-sky-600 transition-colors">Polityka Prywatności</a></li>
+                  <li><a href="#" className="hover:text-sky-600 transition-colors">Regulamin</a></li>
                 </ul>
               </div>
             </div>
