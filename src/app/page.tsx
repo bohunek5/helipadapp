@@ -326,7 +326,7 @@ export default function Home() {
             </p>
             <div className="grid sm:grid-cols-2 gap-12">
               <div className="p-10 bg-slate-50 dark:bg-slate-900 rounded-[50px] border border-slate-200 dark:border-slate-800 transition-all hover:shadow-2xl group overflow-hidden relative">
-                <Image src={getImagePath("/images/real_fleet.jpg")} alt="Fleet" fill className="object-cover opacity-20 group-hover:opacity-40 transition-opacity" />
+                <Image src={getImagePath("/images/real_fleet.jpg")} alt="Fleet" fill className="object-cover opacity-10 dark:opacity-20 group-hover:opacity-20 dark:group-hover:opacity-40 transition-opacity" />
                 <div className="relative z-10">
                   <h4 className="font-black text-sm text-slate-950 dark:text-white uppercase mb-4 tracking-widest">{lang === 'pl' ? 'Stolica Żeglarstwa' : 'Sailing Capital'}</h4>
                   <p className="text-slate-600 dark:text-slate-400 text-sm font-bold">Bezpośrednie połączenie z największymi marinami na Mazurach.</p>
