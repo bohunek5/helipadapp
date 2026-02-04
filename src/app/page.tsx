@@ -284,12 +284,12 @@ export default function Home() {
       </section>
 
       {/* --- SPECS BANNER --- */}
-      <section className="py-24 bg-slate-50 dark:bg-slate-900 border-y border-slate-200 dark:border-slate-800 transition-colors duration-500">
+      <section className="py-24 bg-white dark:bg-slate-900 border-y border-slate-100 dark:border-slate-800 transition-colors duration-500">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-10 text-center">
             {specsData.map((spec, i) => (
               <div key={i} className="flex flex-col items-center group">
-                <div className="w-16 h-16 rounded-3xl bg-white dark:bg-slate-800 text-sky-500 mb-6 flex items-center justify-center shadow-xl border border-slate-100 dark:border-slate-700 transition-all hover:bg-sky-600 hover:text-white">
+                <div className="w-16 h-16 rounded-3xl bg-slate-50 dark:bg-slate-800 text-sky-600 mb-6 flex items-center justify-center shadow-lg border border-slate-100 dark:border-slate-700 transition-all hover:bg-sky-600 hover:text-white hover:scale-110">
                   {spec.icon}
                 </div>
                 <p className="text-[11px] font-black tracking-widest text-slate-500 dark:text-slate-400 mb-2 uppercase leading-none">{t.specs[i]}</p>
@@ -304,7 +304,7 @@ export default function Home() {
       <section id="about" className="py-48 px-6 max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-32 items-center">
           <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
-            className="relative h-[600px] md:h-[800px] rounded-[70px] overflow-hidden shadow-2xl border-8 border-white dark:border-slate-900 ring-1 ring-slate-100 dark:ring-slate-800"
+            className="relative h-[600px] md:h-[800px] rounded-[70px] overflow-hidden shadow-2xl border-8 border-slate-50 dark:border-slate-900 bg-slate-100 dark:bg-slate-900"
           >
             <Image src={getImagePath("/images/real_heli_landing.jpg")} alt="Ops" fill className="object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 to-transparent" />
@@ -325,15 +325,15 @@ export default function Home() {
               {t.about_desc}
             </p>
             <div className="grid sm:grid-cols-2 gap-12">
-              <div className="p-10 bg-slate-50 dark:bg-slate-900 rounded-[50px] border border-slate-200 dark:border-slate-800 transition-all hover:shadow-2xl group overflow-hidden relative">
-                <Image src={getImagePath("/images/real_fleet.jpg")} alt="Fleet" fill className="object-cover opacity-10 dark:opacity-20 group-hover:opacity-20 dark:group-hover:opacity-40 transition-opacity" />
+              <div className="p-10 bg-white dark:bg-slate-900 rounded-[50px] border-2 border-slate-100 dark:border-slate-800 shadow-xl transition-all hover:shadow-2xl hover:-translate-y-2 group overflow-hidden relative">
+                <Image src={getImagePath("/images/real_fleet.jpg")} alt="Fleet" fill className="object-cover opacity-0 dark:opacity-20 transition-opacity" />
                 <div className="relative z-10">
                   <h4 className="font-black text-sm text-slate-950 dark:text-white uppercase mb-4 tracking-widest">{lang === 'pl' ? 'Stolica Żeglarstwa' : 'Sailing Capital'}</h4>
-                  <p className="text-slate-600 dark:text-slate-400 text-sm font-bold">Bezpośrednie połączenie z największymi marinami na Mazurach.</p>
+                  <p className="text-slate-500 dark:text-slate-400 text-sm font-bold">Bezpośrednie połączenie z największymi marinami na Mazurach.</p>
                 </div>
               </div>
-              <div className="p-10 bg-slate-50 dark:bg-slate-900 rounded-[50px] border border-slate-200 dark:border-slate-800 transition-all hover:shadow-2xl group overflow-hidden relative">
-                <Image src={getImagePath("/images/real_hangar.jpg")} alt="Hangar" fill className="object-cover opacity-10 dark:opacity-20 group-hover:opacity-20 dark:group-hover:opacity-40 transition-opacity" />
+              <div className="p-10 bg-white dark:bg-slate-900 rounded-[50px] border-2 border-slate-100 dark:border-slate-800 shadow-xl transition-all hover:shadow-2xl hover:-translate-y-2 group overflow-hidden relative">
+                <Image src={getImagePath("/images/real_hangar.jpg")} alt="Hangar" fill className="object-cover opacity-0 dark:opacity-20 transition-opacity" />
                 <div className="relative z-10">
                   <h4 className="font-black text-sm text-slate-950 dark:text-white uppercase mb-4 tracking-widest">{lang === 'pl' ? 'Ogrzewany Hangar' : 'Heated Hangar'}</h4>
                   <p className="text-slate-600 dark:text-slate-400 text-sm font-bold">Najbezpieczniejsza przystań dla Twojego helikoptera w regionie.</p>
@@ -354,9 +354,9 @@ export default function Home() {
           <div className="grid lg:grid-cols-3 gap-12">
             {pricingData.map((item, idx) => (
               <motion.div key={idx} whileHover={{ y: -30 }}
-                className={`p-16 rounded-[70px] bg-white dark:bg-slate-900 shadow-2xl transition-all duration-500 flex flex-col items-center text-center relative overflow-hidden ${item.highlight ? 'ring-8 ring-sky-500/20 z-10 border-sky-600/50' : 'border border-slate-100 dark:border-slate-800'}`}
+                className={`p-16 rounded-[70px] bg-white dark:bg-slate-900 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] dark:shadow-2xl transition-all duration-500 flex flex-col items-center text-center relative overflow-hidden ${item.highlight ? 'ring-8 ring-sky-500/10 z-10 border border-sky-100 dark:border-sky-600/50' : 'border border-slate-100 dark:border-slate-800'}`}
               >
-                <div className="w-20 h-20 rounded-[35px] bg-slate-100 dark:bg-slate-800 text-sky-600 mb-12 flex items-center justify-center shadow-inner">
+                <div className="w-20 h-20 rounded-[35px] bg-slate-50 dark:bg-slate-800 text-sky-600 mb-12 flex items-center justify-center shadow-sm">
                   {idx === 0 ? <CloudSun size={40} /> : idx === 1 ? <Clock size={40} /> : <Layers size={40} />}
                 </div>
                 <h4 className="text-xs font-black tracking-[0.5em] text-slate-500 mb-6 uppercase">{item.title}</h4>
@@ -375,7 +375,7 @@ export default function Home() {
 
       {/* --- GOOGLE MAP --- */}
       <section className="py-24 px-6 bg-white dark:bg-slate-950 transition-colors duration-500">
-        <div className="max-w-7xl mx-auto rounded-[80px] overflow-hidden shadow-2xl border-8 border-white dark:border-slate-900 relative h-[700px]">
+        <div className="max-w-7xl mx-auto rounded-[80px] overflow-hidden shadow-2xl border-8 border-slate-50 dark:border-slate-900 relative h-[700px]">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14695.275988581699!2d21.7915!3d54.0322!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46e1008734e5672b%3A0xe6734e5672b4e5b!2sHelipad%20Mazury!5e0!3m2!1spl!2spl!4v1700000000000!5m2!1spl!2spl"
             title="Helipad Mazury Location Map"
@@ -398,12 +398,13 @@ export default function Home() {
           </div>
 
           <div className="grid lg:grid-cols-2 gap-8 mb-24">
-            <a href="tel:+48607241090" className="flex flex-col items-center justify-center p-16 rounded-[60px] bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:shadow-2xl hover:scale-[1.02] transition-all group">
+
+            <a href="tel:+48607241090" className="flex flex-col items-center justify-center p-16 rounded-[60px] bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-2xl hover:scale-[1.02] transition-all group">
               <div className="w-20 h-20 rounded-3xl bg-sky-600 text-white flex items-center justify-center mb-8 shadow-lg group-hover:rotate-12 transition-transform"><Phone size={32} /></div>
               <p className="text-xs font-black tracking-[0.4em] text-slate-400 mb-4 uppercase">NUMER TELEFONU</p>
               <p className="text-4xl md:text-6xl font-black text-slate-950 dark:text-white group-hover:text-sky-600 transition-colors">+48 607 241 090</p>
             </a>
-            <a href="mailto:biuro@helipadmazury.pl" className="flex flex-col items-center justify-center p-16 rounded-[60px] bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:shadow-2xl hover:scale-[1.02] transition-all group">
+            <a href="mailto:biuro@helipadmazury.pl" className="flex flex-col items-center justify-center p-16 rounded-[60px] bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-2xl hover:scale-[1.02] transition-all group">
               <div className="w-20 h-20 rounded-3xl bg-slate-950 dark:bg-white text-white dark:text-slate-950 flex items-center justify-center mb-8 shadow-lg group-hover:-rotate-12 transition-transform"><Mail size={32} /></div>
               <p className="text-xs font-black tracking-[0.4em] text-slate-400 mb-4 uppercase">MAIL</p>
               <p className="text-3xl md:text-5xl font-black text-slate-950 dark:text-white group-hover:text-sky-600 transition-colors break-all">biuro@helipadmazury.pl</p>
