@@ -1,50 +1,82 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0a0a0a;
-  --foreground: #e2e8f0;
-  --primary: #25c0f4;
-  --primary-glow: rgba(37, 192, 244, 0.4);
+  --background: #ffffff;
+  --foreground: #0f172a;
+  --primary: #0ea5e9;
+  /* Sky Azure */
+  --primary-glow: rgba(14, 165, 233, 0.2);
   --secondary: #64748b;
-  --titanium: #94a3b8;
+  --titanium: #334155;
+  --frost: rgba(255, 255, 255, 0.7);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-inter), sans-serif;
   overflow-x: hidden;
 }
 
 @layer utilities {
-  .glass {
-    @apply backdrop-blur-xl bg-white/5 border border-white/10;
-  }
-  
-  .glow-text {
-    text-shadow: 0 0 20px var(--primary-glow);
-  }
-  
-  .glow-border {
-    box-shadow: 0 0 15px var(--primary-glow);
+  .frost-glass {
+    @apply backdrop-blur-2xl bg-white/70 border border-white/40 shadow-xl shadow-slate-200/50;
   }
 
-  .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#25c0f4] to-[#a5f3fc];
+  .glow-text {
+    text-shadow: 0 0 15px var(--primary-glow);
+  }
+
+  .glow-border {
+    box-shadow: 0 0 20px var(--primary-glow);
+  }
+
+  .gradient-text-azure {
+    @apply bg-clip-text text-transparent bg-gradient-to-br from-[#0284c7] via-[#0ea5e9] to-[#38bdf8];
+  }
+
+  .premium-shadow {
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
   }
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
+
 ::-webkit-scrollbar-track {
-  background: #0a0a0a;
+  background: #f8fafc;
 }
+
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
-  border-radius: 4px;
+  background: #cbd5e1;
+  border-radius: 5px;
+  border: 2px solid #f8fafc;
 }
+
 ::-webkit-scrollbar-thumb:hover {
-  background: #25c0f4;
+  background: #0ea5e9;
+}
+
+.hero-mask {
+  mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
 }

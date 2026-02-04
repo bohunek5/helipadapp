@@ -1,187 +1,258 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Shield, Thermometer, MapPin, Clock, Phone, Mail } from "lucide-react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { Shield, Thermometer, MapPin, Compass, Waves, Wind, ArrowRight, CheckCircle2, Phone, Mail } from "lucide-react";
 import Image from "next/image";
+import { useRef } from "react";
 
 export default function Home() {
-  const fadeIn = {
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.8 }
-  };
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  });
 
-  const services = [
-    { title: "Lądowanie w Dzień", price: "100 PLN", desc: "Zawsze gotowi na Twój przylot." },
-    { title: "Lądowanie w Nocy", price: "200 PLN", desc: "Oświetlone i bezpieczne lądowisko." },
-    { title: "Hangar", price: "200 PLN / doba", desc: "Ogrzewany, monitorowany, bezpieczny." }
+  const heroScale = useTransform(scrollYProgress, [0, 0.2], [1, 1.1]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
+
+  const pricing = [
+    { title: "DAY LANDING", price: "100", unit: "PLN", desc: "Standard daylight approach with full ground support." },
+    { title: "NIGHT LANDING", price: "200", unit: "PLN", desc: "Precision lighting and advanced monitoring for nightOps.", highlight: true },
+    { title: "HANGARAGE", price: "200", unit: "PLN/DAY", desc: "Premium heated and monitored shelter for your aircraft." }
   ];
 
   return (
-    <main className="flex flex-col">
-      {/* Hero Section */}
-      <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
+    <main ref={containerRef} className="flex flex-col bg-white">
+      {/* Hero Masterpiece Section */}
+      <section className="relative h-screen w-full flex items-center justify-center p-6 overflow-hidden">
+        <motion.div
+          style={{ scale: heroScale }}
+          className="absolute inset-0 z-0"
+        >
           <Image
-            src="/images/hero.png"
-            alt="Helipad Giżycko Hero"
+            src="/images/mazury_aerial.png"
+            alt="Mazury Aerial 2026"
             fill
-            className="object-cover opacity-60 scale-105 animate-pulse-slow"
+            className="object-cover hero-mask"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/80 via-transparent to-[#0a0a0a]" />
-        </div>
+          <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-white" />
+        </motion.div>
 
         <motion.div
-          className="relative z-10 text-center px-4"
-          {...fadeIn}
+          style={{ opacity: heroOpacity }}
+          className="relative z-10 text-center max-w-5xl"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
         >
-          <span className="text-[#25c0f4] text-sm font-bold tracking-[0.3em] uppercase mb-4 block glow-text">
-            Standard 2026 — Lądowisko EPGH
-          </span>
-          <h1 className="text-5xl md:text-8xl font-outfit font-black tracking-tighter mb-6 gradient-text">
-            MAZURY HELIPAD<br />GIŻYCKO
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/30 backdrop-blur-md border border-white/50 mb-8 shadow-xl">
+            <span className="w-2 h-2 rounded-full bg-sky-500 animate-pulse"></span>
+            <span className="text-[10px] font-black tracking-[0.3em] text-sky-900 uppercase">MAZURY FROM ABOVE 2026</span>
+          </div>
+          <h1 className="text-6xl md:text-[120px] font-outfit font-black tracking-tighter leading-[0.85] mb-8 text-slate-900 drop-shadow-sm">
+            ELEVATED<br />
+            <span className="gradient-text-azure">EXPERIENCE</span>
           </h1>
-          <p className="text-titanium text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed font-light">
-            Twój port lotniczy w samym sercu Krainy Wielkich Jezior.
-            Nowoczesna flota, ogrzewany hangar i 24-godzinny monitoring.
+          <p className="text-slate-600 text-lg md:text-2xl max-w-3xl mx-auto mb-12 font-medium leading-relaxed drop-shadow-sm">
+            Experience the breathtaking beauty of Mazury from a different perspective.
+            Giżycko's most advanced helicopter port — EPGH.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="px-8 py-4 bg-[#25c0f4] text-black font-black rounded-lg glow-border hover:brightness-110 transition-all">
-              ZAREZERWUJ LĄDOWANIE
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+            <button className="group px-10 py-5 bg-slate-900 text-white font-black rounded-2xl shadow-2xl shadow-slate-300 hover:bg-sky-600 hover:scale-105 active:scale-95 transition-all flex items-center gap-3">
+              RESERVE YOUR SLOT <ArrowRight className="group-hover:translate-x-1 transition-transform" />
             </button>
-            <button className="px-8 py-4 glass border-white/20 text-white font-bold rounded-lg hover:bg-white/10 transition-all">
-              ZOBACZ CENNIK
+            <button className="px-10 py-5 bg-white text-slate-900 border border-slate-200 font-bold rounded-2xl shadow-lg hover:shadow-2xl transition-all">
+              EXPLORE FACILITIES
             </button>
           </div>
         </motion.div>
       </section>
 
-      {/* Features Section */}
-      <section className="py-24 px-6 bg-[#0a0a0a]">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-12 text-center">
-          <div className="flex flex-col items-center">
-            <div className="w-16 h-16 rounded-2xl glass flex items-center justify-center mb-6 text-[#25c0f4] glow-border">
-              <Shield size={32} />
+      {/* About / Location Section */}
+      <section id="about" className="py-40 px-6 max-w-7xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-24 items-center">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="relative h-[600px] rounded-[40px] overflow-hidden shadow-2xl animate-float"
+          >
+            <Image
+              src="/images/helipad_day.png"
+              alt="Modern Helipad Giżycko"
+              fill
+              className="object-cover"
+            />
+            <div className="absolute top-8 left-8 frost-glass p-6 rounded-3xl">
+              <div className="flex items-center gap-3 mb-2">
+                <Compass className="text-sky-600" />
+                <span className="font-black text-xs tracking-widest uppercase">LOCATION PRECISION</span>
+              </div>
+              <p className="text-lg font-outfit font-black">54.0305° N, 21.7645° E</p>
             </div>
-            <h3 className="font-outfit font-bold text-xl mb-3">Monitoring 24/7</h3>
-            <p className="text-secondary text-sm font-light">Twoja maszyna jest pod stałą opieką najnowocześniejszych systemów.</p>
-          </div>
-          <div className="flex flex-col items-center">
-            <div className="w-16 h-16 rounded-2xl glass flex items-center justify-center mb-6 text-[#25c0f4] glow-border">
-              <Thermometer size={32} />
+          </motion.div>
+
+          <div>
+            <span className="text-sky-600 font-black tracking-[0.4em] uppercase text-xs mb-6 block">PREMIUM HUB</span>
+            <h2 className="text-5xl md:text-7xl font-outfit font-black tracking-tighter mb-8 leading-none">
+              GIŻYCKO'S<br />NEW STANDARD.
+            </h2>
+            <p className="text-slate-500 text-xl font-medium leading-relaxed mb-12">
+              Situated right next to the city bypass (Route 63), our helipad offers instant access to the heart of Giżycko in just 5 minutes.
+              Whether it's leisure or business, we ensure you land in style and security.
+            </p>
+
+            <div className="grid sm:grid-cols-2 gap-10">
+              <div className="space-y-4">
+                <div className="w-12 h-12 rounded-2xl bg-sky-50 flex items-center justify-center text-sky-600">
+                  <Shield size={24} />
+                </div>
+                <h4 className="font-black text-sm tracking-widest uppercase">24/7 MONITORING</h4>
+                <p className="text-slate-400 text-sm leading-relaxed">Continuous surveillance with advanced AI-integrated thermal systems.</p>
+              </div>
+              <div className="space-y-4">
+                <div className="w-12 h-12 rounded-2xl bg-sky-50 flex items-center justify-center text-sky-600">
+                  <Thermometer size={24} />
+                </div>
+                <h4 className="font-black text-sm tracking-widest uppercase">CLIMATE CONTROL</h4>
+                <p className="text-slate-400 text-sm leading-relaxed">Heated hangar space providing perfect conditions all year round.</p>
+              </div>
             </div>
-            <h3 className="font-outfit font-bold text-xl mb-3">Ciepły Hangar</h3>
-            <p className="text-secondary text-sm font-light">Ogrzewana hala serwisowa zapewniająca idealne warunki dla śmigłowca.</p>
-          </div>
-          <div className="flex flex-col items-center">
-            <div className="w-16 h-16 rounded-2xl glass flex items-center justify-center mb-6 text-[#25c0f4] glow-border">
-              <MapPin size={32} />
-            </div>
-            <h3 className="font-outfit font-bold text-xl mb-3">Szybki Dojazd</h3>
-            <p className="text-secondary text-sm font-light">Zaledwie 5 minut od absolutnego centrum Giżycka (obwodnica trasa 63).</p>
           </div>
         </div>
       </section>
 
-      {/* Services Section */}
-      <section id="services" className="py-32 px-6 bg-gradient-to-b from-[#0a0a0a] to-[#050505] relative">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-5xl font-outfit font-black mb-4">NASZ CENNIK</h2>
-            <div className="w-20 h-1 bg-[#25c0f4] mx-auto glow-border"></div>
+      {/* Pricing Section (Interative Cards) */}
+      <section id="services" className="py-40 bg-slate-50 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-24">
+            <h2 className="text-5xl md:text-7xl font-outfit font-black tracking-tighter mb-4 text-slate-900 text-center">TRANSPARENT PRICING.</h2>
+            <p className="text-slate-400 font-bold uppercase tracking-widest text-xs">NO HIDDEN COSTS • PRE-BOOKING AVAILABLE</p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {services.map((service, idx) => (
+          <div className="grid md:grid-cols-3 gap-10">
+            {pricing.map((item, idx) => (
               <motion.div
                 key={idx}
-                whileHover={{ y: -10 }}
-                className="glass p-10 rounded-3xl border-white/5 group hover:border-[#25c0f4]/30 transition-all duration-500"
+                whileHover={{ y: -20 }}
+                className={`relative p-12 rounded-[40px] shadow-xl transition-all duration-500 flex flex-col items-center text-center ${item.highlight ? 'bg-white premium-shadow ring-4 ring-sky-100' : 'bg-transparent border border-slate-200'}`}
               >
-                <h4 className="text-secondary text-xs font-bold uppercase tracking-widest mb-2">{service.title}</h4>
-                <div className="text-4xl font-outfit font-black text-white mb-6 group-hover:text-[#25c0f4] transition-colors">{service.price}</div>
-                <p className="text-titanium text-sm leading-relaxed mb-8">{service.desc}</p>
-                <div className="h-px w-full bg-white/5 mb-8"></div>
-                <ul className="text-xs text-secondary space-y-4">
-                  <li className="flex items-center gap-2">✓ Bezpieczne podejście</li>
-                  <li className="flex items-center gap-2">✓ Profesjonalna obsługa</li>
-                  <li className="flex items-center gap-2">✓ Gwarancja rezerwacji</li>
-                </ul>
+                {item.highlight && (
+                  <div className="absolute -top-5 px-6 py-2 bg-sky-600 text-white font-black text-[10px] tracking-widest rounded-full uppercase">
+                    MOST POPULAR
+                  </div>
+                )}
+                <h4 className="text-xs font-black tracking-[0.3em] text-slate-400 border-b border-slate-200 pb-4 mb-8 w-full uppercase">{item.title}</h4>
+                <div className="flex items-baseline gap-2 mb-6">
+                  <span className="text-6xl font-outfit font-black text-slate-900">{item.price}</span>
+                  <span className="text-lg font-black text-slate-400">{item.unit}</span>
+                </div>
+                <p className="text-slate-500 font-medium text-sm leading-relaxed mb-10 h-12">{item.desc}</p>
+
+                <div className="w-full space-y-4 mb-12">
+                  <div className="flex items-center gap-3 text-xs font-bold text-slate-400"><CheckCircle2 size={16} className="text-sky-500" /> Ground Handling</div>
+                  <div className="flex items-center gap-3 text-xs font-bold text-slate-400"><CheckCircle2 size={16} className="text-sky-500" /> Weather Briefing</div>
+                  <div className="flex items-center gap-3 text-xs font-bold text-slate-400"><CheckCircle2 size={16} className="text-sky-500" /> Instant Access</div>
+                </div>
+
+                <button className={`w-full py-5 rounded-2xl font-black text-xs tracking-widest transition-all ${item.highlight ? 'bg-sky-600 text-white hover:bg-sky-700' : 'bg-slate-900 text-white hover:bg-sky-600'}`}>
+                  BOOK THIS SLOT
+                </button>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Gallery Highlight */}
-      <section id="gallery" className="relative h-[600px] w-full mt-24">
-        <Image
-          src="/images/hangar.png"
-          alt="Hangar Helipad"
-          fill
-          className="object-cover opacity-40"
-        />
-        <div className="absolute inset-0 bg-[#0a0a0a]/40 backdrop-blur-sm flex items-center justify-center">
-          <div className="text-center px-4">
-            <h2 className="text-4xl md:text-6xl font-outfit font-black mb-8">ELEGANCJA I TECHNOLOGIA</h2>
-            <button className="px-10 py-5 glass border-white/10 hover:border-[#25c0f4] transition-all rounded-full font-bold">
-              ZOBACZ PEŁNĄ GALERIĘ
+      {/* Gallery Showcase */}
+      <section id="gallery" className="py-40 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+            <div>
+              <h2 className="text-5xl md:text-7xl font-outfit font-black tracking-tighter text-slate-900">VISUAL HORIZON.</h2>
+              <p className="text-slate-400 font-bold uppercase tracking-widest text-xs mt-2">OUR FLEET AND FACILITIES THROUGH THE LENS</p>
+            </div>
+            <button className="px-8 py-4 bg-white border border-slate-200 font-black text-xs tracking-widest rounded-full hover:bg-sky-50 transition-all">
+              VIEW FULL GALLERY
             </button>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="relative h-[600px] rounded-[30px] overflow-hidden group cursor-pointer shadow-2xl">
+              <Image src="/images/mazury_aerial.png" fill alt="Mazury" className="object-cover group-hover:scale-110 transition-transform duration-700" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-12">
+                <div className="text-white">
+                  <h4 className="font-outfit font-black text-3xl">Lakescape</h4>
+                  <p className="text-sm font-medium text-white/70">Giżycko area aerial view</p>
+                </div>
+              </div>
+            </div>
+            <div className="grid gap-8">
+              <div className="relative h-[284px] rounded-[30px] overflow-hidden group cursor-pointer shadow-xl">
+                <Image src="/images/helipad_day.png" fill alt="Hangar" className="object-cover group-hover:scale-110 transition-transform duration-700" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-8">
+                  <span className="text-white font-bold tracking-widest text-xs uppercase underline underline-offset-8 decoration-sky-400">DETAIL VIEW</span>
+                </div>
+              </div>
+              <div className="relative h-[284px] rounded-[30px] overflow-hidden group cursor-pointer shadow-xl bg-slate-900 flex items-center justify-center">
+                <div className="text-center">
+                  <div className="w-12 h-12 rounded-full border-2 border-sky-500 border-t-transparent animate-spin mx-auto mb-4"></div>
+                  <p className="text-white/50 text-xs font-bold uppercase tracking-[0.2em]">Loading Live Feed...</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section id="contact" className="py-32 px-6 max-w-6xl mx-auto grid md:grid-cols-2 gap-20">
-        <div>
-          <h2 className="text-4xl font-outfit font-black mb-8">KONTAKT</h2>
-          <p className="text-titanium mb-12 font-light">
-            Masz pytania dotyczące lądowania lub dostępności hangaru? Nasz zespół jest dostępny 24/7 dla pilotów i operatorów.
-          </p>
-          <div className="space-y-8">
-            <div className="flex gap-6 items-center">
-              <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center text-[#25c0f4]"><Phone size={24} /></div>
-              <div>
-                <p className="text-[10px] text-secondary font-bold uppercase">Zadzwoń do nas</p>
-                <p className="text-xl font-bold">607 241 090</p>
+      {/* Modern Contact Section */}
+      <section id="contact" className="pb-40 px-6">
+        <div className="max-w-5xl mx-auto rounded-[50px] bg-slate-900 p-12 md:p-24 overflow-hidden relative shadow-2xl">
+          <div className="absolute -top-24 -right-24 w-64 h-64 bg-sky-600 rounded-full blur-[120px] opacity-20"></div>
+          <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-slate-100 rounded-full blur-[100px] opacity-10"></div>
+
+          <div className="relative z-10 grid lg:grid-cols-2 gap-20">
+            <div>
+              <h2 className="text-5xl font-outfit font-black text-white mb-8">GET IN TOUCH.</h2>
+              <div className="space-y-12">
+                <div className="flex gap-6 items-center">
+                  <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-sky-400 shadow-xl"><Phone size={28} /></div>
+                  <div>
+                    <p className="text-[10px] text-white/40 font-black uppercase tracking-[0.2em] mb-1">Direct Terminal</p>
+                    <p className="text-2xl font-black text-white">+48 607 241 090</p>
+                  </div>
+                </div>
+                <div className="flex gap-6 items-center">
+                  <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-sky-400 shadow-xl"><Mail size={28} /></div>
+                  <div>
+                    <p className="text-[10px] text-white/40 font-black uppercase tracking-[0.2em] mb-1">E-mail Ops</p>
+                    <p className="text-2xl font-black text-white px-2">biuro@helipadmazury.pl</p>
+                  </div>
+                </div>
               </div>
             </div>
-            <div className="flex gap-6 items-center">
-              <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center text-[#25c0f4]"><Mail size={24} /></div>
-              <div>
-                <p className="text-[10px] text-secondary font-bold uppercase">Napisz e-mail</p>
-                <p className="text-xl font-bold">biuro@helipadmazury.pl</p>
-              </div>
-            </div>
-            <div className="flex gap-6 items-center">
-              <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center text-[#25c0f4]"><MapPin size={24} /></div>
-              <div>
-                <p className="text-[10px] text-secondary font-bold uppercase">Lokalizacja EPGH</p>
-                <p className="text-xl font-bold italic">ul. Sybiraków 28, Giżycko</p>
-              </div>
+
+            <div className="bg-white p-10 rounded-[40px] shadow-2xl">
+              <form className="space-y-6">
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 block ml-2">WHO IS CONTACTING US?</label>
+                  <input type="text" className="w-full bg-slate-50 border-none rounded-2xl p-5 text-sm font-bold focus:ring-2 focus:ring-sky-500 transition-all outline-none" placeholder="Pilot Name / Company" />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 block ml-2">AIRCRAFT CALLSIGN (OPTIONAL)</label>
+                  <input type="text" className="w-full bg-slate-50 border-none rounded-2xl p-5 text-sm font-bold focus:ring-2 focus:ring-sky-500 transition-all outline-none" placeholder="SP-FLY" />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 block ml-2">MESSAGE</label>
+                  <textarea rows={3} className="w-full bg-slate-50 border-none rounded-2xl p-5 text-sm font-bold focus:ring-2 focus:ring-sky-500 transition-all outline-none resize-none" placeholder="Describe your request..."></textarea>
+                </div>
+                <button className="w-full py-6 bg-sky-600 text-white font-black text-xs tracking-widest rounded-2xl shadow-xl shadow-sky-100 hover:bg-slate-900 transition-all active:scale-95">
+                  SEND REQUEST
+                </button>
+              </form>
             </div>
           </div>
-        </div>
-
-        <div className="glass p-10 rounded-3xl border-white/5">
-          <form className="space-y-6">
-            <div>
-              <label className="text-xs font-bold text-secondary uppercase mb-2 block">Imię i Nazwisko</label>
-              <input type="text" className="w-full bg-white/5 border border-white/10 rounded-lg p-4 focus:border-[#25c0f4] transition-all outline-none" placeholder="Jan Kowalski" />
-            </div>
-            <div>
-              <label className="text-xs font-bold text-secondary uppercase mb-2 block">Twój E-mail</label>
-              <input type="email" className="w-full bg-white/5 border border-white/10 rounded-lg p-4 focus:border-[#25c0f4] transition-all outline-none" placeholder="pilot@example.com" />
-            </div>
-            <div>
-              <label className="text-xs font-bold text-secondary uppercase mb-2 block">Wiadomość</label>
-              <textarea rows={4} className="w-full bg-white/5 border border-white/10 rounded-lg p-4 focus:border-[#25c0f4] transition-all outline-none" placeholder="Zapytanie o miejsce w hangarze..."></textarea>
-            </div>
-            <button className="w-full py-5 bg-[#25c0f4] text-black font-black rounded-lg glow-border hover:brightness-110 transition-all">
-              WYŚLIJ ZAPYTANIE
-            </button>
-          </form>
         </div>
       </section>
     </main>
