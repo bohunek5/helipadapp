@@ -10,6 +10,9 @@ import {
 import Image from "next/image";
 import { useRef, useState } from "react";
 
+// Helper for GitHub Pages image paths
+const getImagePath = (path: string) => `/helipadapp${path}`;
+
 export default function Home() {
   const containerRef = useRef(null);
   const [formStep, setFormStep] = useState(0);
@@ -54,7 +57,7 @@ export default function Home() {
           className="absolute inset-0 z-0"
         >
           <Image
-            src="/images/mazury_aerial.png"
+            src={getImagePath("/images/mazury_aerial.png")}
             alt="Mazury z lotu ptaka 2026"
             fill
             className="object-cover hero-mask scale-110"
@@ -76,14 +79,14 @@ export default function Home() {
           </div>
           <h1 className="text-7xl md:text-[140px] font-outfit font-black tracking-tighter leading-[0.8] mb-10 text-slate-950 drop-shadow-xl">
             MAZURY Z LOTU<br />
-            <span className="gradient-text-azure">PTAKA</span>
+            <span className="gradient-text-azure uppercase">Ptaka</span>
           </h1>
           <p className="text-slate-700 text-xl md:text-2xl max-w-4xl mx-auto mb-16 font-semibold leading-relaxed drop-shadow-sm px-4">
             Najbardziej zaawansowana infrastruktura lotnicza w Giżycku.
             Bezpośrednie połączenie, całodobowe wsparcie techniczne i standard bezpieczeństwa jutra.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <a href="#booking" className="group px-12 py-6 bg-slate-950 text-white font-black rounded-3xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.3)] hover:bg-sky-600 hover:scale-110 active:scale-95 transition-all flex items-center gap-3 text-sm tracking-widest">
+            <a href="#booking" className="group px-12 py-6 bg-slate-900 text-white font-black rounded-3xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.3)] hover:bg-sky-600 hover:scale-110 active:scale-95 transition-all flex items-center gap-3 text-sm tracking-widest">
               ZAREZERWUJ SLOT <ArrowRight className="group-hover:translate-x-2 transition-transform" />
             </a>
             <a href="#about" className="px-12 py-6 bg-white/80 backdrop-blur-md text-slate-950 border border-slate-200 font-black rounded-3xl shadow-xl hover:shadow-2xl transition-all text-sm tracking-widest">
@@ -127,7 +130,7 @@ export default function Home() {
             className="relative h-[700px] rounded-[60px] overflow-hidden shadow-2xl"
           >
             <Image
-              src="/images/real_heli_landing.jpg"
+              src={getImagePath("/images/real_heli_landing.jpg")}
               alt="Operacje Helipad Giżycko"
               fill
               className="object-cover"
@@ -142,7 +145,7 @@ export default function Home() {
           </motion.div>
 
           <div className="relative">
-            <span className="text-sky-600 font-bold tracking-[0.5em] uppercase text-[10px] mb-8 block ml-1">O NAS</span>
+            <span className="text-sky-600 font-bold tracking-[0.5em] uppercase text-[10px] mb-8 block ml-1 text-sky-500">O NAS</span>
             <h2 className="text-6xl md:text-8xl font-outfit font-black tracking-tighter mb-10 leading-[0.9]">
               PIONIERZY<br />MAZUR.
             </h2>
@@ -154,12 +157,12 @@ export default function Home() {
             <div className="grid sm:grid-cols-2 gap-10">
               <div className="space-y-4">
                 <div className="w-14 h-14 rounded-2xl bg-slate-900 text-white flex items-center justify-center shadow-lg"><Waves size={24} /></div>
-                <h4 className="font-black text-xs tracking-widest uppercase">CENTRUM ŻEGLARSTWA</h4>
+                <h4 className="font-black text-xs tracking-widest uppercase text-slate-900">CENTRUM ŻEGLARSTWA</h4>
                 <p className="text-slate-500 text-sm leading-relaxed">Strategiczne położenie między jeziorami Kisajno i Niegocin.</p>
               </div>
               <div className="space-y-4">
                 <div className="w-14 h-14 rounded-2xl bg-sky-500 text-white flex items-center justify-center shadow-lg"><Thermometer size={24} /></div>
-                <h4 className="font-black text-xs tracking-widest uppercase">OGRRZEWANY HANGAR</h4>
+                <h4 className="font-black text-xs tracking-widest uppercase text-slate-900">OGRZEWANY HANGAR</h4>
                 <p className="text-slate-500 text-sm leading-relaxed">Bezpieczne i ciepłe schronienie dla Twojej maszyny przez cały rok.</p>
               </div>
             </div>
@@ -171,7 +174,7 @@ export default function Home() {
       <section id="services" className="py-48 bg-slate-50 border-y border-slate-100 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-28">
-            <span className="text-sky-600 font-black tracking-[0.5em] uppercase text-[10px] mb-8 block">CENNIK & USŁUGI</span>
+            <span className="text-sky-600 font-black tracking-[0.5em] uppercase text-[10px] mb-8 block font-bold text-sky-500">CENNIK & USŁUGI</span>
             <h2 className="text-6xl md:text-8xl font-outfit font-black tracking-tighter text-slate-950">NASZA OFERTA.</h2>
           </div>
 
@@ -191,7 +194,7 @@ export default function Home() {
                   <span className="text-lg font-black text-slate-400">{item.unit}</span>
                 </div>
                 <p className="text-slate-500 font-bold text-sm tracking-wide lowercase mb-12 h-12 underline decoration-sky-100 underline-offset-8">{item.desc}</p>
-                <button onClick={() => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' })} className={`w-full py-6 rounded-3xl font-black text-[11px] tracking-widest transition-all ${item.highlight ? 'bg-sky-600 text-white hover:bg-slate-950' : 'bg-slate-950 text-white hover:bg-sky-600'}`}>
+                <button onClick={() => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' })} className={`w-full py-6 rounded-3xl font-black text-[11px] tracking-widest transition-all ${item.highlight ? 'bg-sky-600 text-white hover:bg-slate-950' : 'bg-slate-900 text-white hover:bg-sky-600'}`}>
                   WYBIERZ TERMIN
                 </button>
               </motion.div>
@@ -205,7 +208,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-12">
             <div>
-              <span className="text-sky-600 font-bold tracking-[0.5em] uppercase text-[10px] mb-6 block">WIĘCEJ NIŻ LĄDOWISKO</span>
+              <span className="text-sky-600 font-bold tracking-[0.5em] uppercase text-[10px] mb-6 block font-bold text-sky-500">WIĘCEJ NIŻ LĄDOWISKO</span>
               <h2 className="text-6xl md:text-8xl font-outfit font-black tracking-tighter text-slate-950">GALERIA.</h2>
             </div>
           </div>
@@ -217,7 +220,7 @@ export default function Home() {
                 whileHover={{ scale: 0.98 }}
                 className="group relative h-[450px] rounded-[50px] overflow-hidden cursor-pointer shadow-xl"
               >
-                <Image src={img.src} fill alt={img.title} className="object-cover group-hover:scale-110 transition-transform duration-1000" />
+                <Image src={getImagePath(img.src)} fill alt={img.title} className="object-cover group-hover:scale-110 transition-transform duration-1000" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-12 flex items-end">
                   <div>
                     <h4 className="font-outfit font-black text-2xl text-white mb-2">{img.title}</h4>
@@ -245,31 +248,31 @@ export default function Home() {
 
             <AnimatePresence mode="wait">
               {formStep === 0 && (
-                <motion.div key="s0" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="grid md:grid-cols-2 gap-8">
+                <motion.div key="s0" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="grid md:grid-cols-2 gap-8 text-left">
                   <div className="space-y-4">
                     <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-5 block leading-none">DANE PILOTA / FIRMA</label>
-                    <input type="text" placeholder="Imię, Nazwisko / Nazwa" className="w-full px-8 py-6 bg-white border border-slate-100 rounded-3xl outline-none focus:ring-4 focus:ring-sky-100 font-black text-xs" />
+                    <input type="text" placeholder="Imię, Nazwisko / Nazwa" className="w-full px-8 py-6 bg-white border border-slate-100 rounded-3xl outline-none focus:ring-4 focus:ring-sky-100 font-bold text-slate-900" />
                   </div>
                   <div className="space-y-4">
                     <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-5 block leading-none">TELEFON KONTAKTOWY</label>
-                    <input type="tel" placeholder="+48 000 000 000" className="w-full px-8 py-6 bg-white border border-slate-100 rounded-3xl outline-none focus:ring-4 focus:ring-sky-100 font-black text-xs" />
+                    <input type="tel" placeholder="+48 000 000 000" className="w-full px-8 py-6 bg-white border border-slate-100 rounded-3xl outline-none focus:ring-4 focus:ring-sky-100 font-bold text-slate-900" />
                   </div>
-                  <button onClick={() => setFormStep(1)} className="md:col-span-2 py-8 bg-slate-950 text-white rounded-3xl font-black text-xs tracking-[0.2em] shadow-2xl hover:bg-sky-600 transition-all mt-6">DALEJ: SZCZEGÓŁY LOTU</button>
+                  <button onClick={() => setFormStep(1)} className="md:col-span-2 py-8 bg-slate-900 text-white rounded-3xl font-black text-xs tracking-[0.2em] shadow-2xl hover:bg-sky-600 transition-all mt-6">DALEJ: SZCZEGÓŁY LOTU</button>
                 </motion.div>
               )}
               {formStep === 1 && (
                 <motion.div key="s1" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="grid md:grid-cols-2 gap-8 text-left">
                   <div className="space-y-4">
                     <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-5 block leading-none">DATA LĄDOWANIA</label>
-                    <input type="date" className="w-full px-8 py-6 bg-white border border-slate-100 rounded-3xl outline-none focus:ring-4 focus:ring-sky-100 font-black text-xs" />
+                    <input type="date" className="w-full px-8 py-6 bg-white border border-slate-100 rounded-3xl outline-none focus:ring-4 focus:ring-sky-100 font-bold text-slate-900" />
                   </div>
                   <div className="space-y-4">
                     <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-5 block leading-none">GODZINA (ETA)</label>
-                    <input type="time" className="w-full px-8 py-6 bg-white border border-slate-100 rounded-3xl outline-none focus:ring-4 focus:ring-sky-100 font-black text-xs" />
+                    <input type="time" className="w-full px-8 py-6 bg-white border border-slate-100 rounded-3xl outline-none focus:ring-4 focus:ring-sky-100 font-bold text-slate-900" />
                   </div>
                   <div className="md:col-span-2 flex gap-4 mt-6">
-                    <button onClick={() => setFormStep(0)} className="px-10 py-8 bg-white text-slate-400 font-black text-xs rounded-3xl">COFNIJ</button>
-                    <button onClick={() => setFormStep(2)} className="flex-1 py-8 bg-slate-950 text-white rounded-3xl font-black text-xs tracking-widest shadow-2xl hover:bg-sky-600 transition-all">PODSUMOWANIE</button>
+                    <button onClick={() => setFormStep(0)} className="px-10 py-8 bg-white text-slate-400 font-black text-xs rounded-3xl hover:text-slate-900 transition-colors">COFNIJ</button>
+                    <button onClick={() => setFormStep(2)} className="flex-1 py-8 bg-slate-900 text-white rounded-3xl font-black text-xs tracking-widest shadow-2xl hover:bg-sky-600 transition-all">PODSUMOWANIE</button>
                   </div>
                 </motion.div>
               )}
@@ -281,8 +284,8 @@ export default function Home() {
                   <h3 className="text-3xl font-outfit font-black mb-4">GOTOWY DO WYŁANIA?</h3>
                   <p className="text-slate-500 font-bold mb-12">Zgłoszenie zostanie wysłane bezpośrednio do obsługi EPGH.</p>
                   <div className="flex gap-4">
-                    <button onClick={() => setFormStep(1)} className="px-10 py-8 bg-white text-slate-400 font-black text-xs rounded-3xl">EDYTUJ</button>
-                    <button onClick={() => { alert("Zgłoszenie wysłane! Skontaktujemy się wkrótce."); setFormStep(0); }} className="flex-1 py-8 bg-sky-600 text-white rounded-3xl font-black text-xs tracking-widest hover:bg-slate-950 transition-all">WYŚLIJ REZERWACJĘ</button>
+                    <button onClick={() => setFormStep(1)} className="px-10 py-8 bg-white text-slate-400 font-black text-xs rounded-3xl hover:text-slate-900 transition-colors">EDYTUJ</button>
+                    <button onClick={() => { alert("Zgłoszenie wysłane! Skontaktujemy się wkrótce."); setFormStep(0); }} className="flex-1 py-8 bg-sky-600 text-white rounded-3xl font-black text-xs tracking-widest hover:bg-slate-900 transition-all shadow-xl shadow-sky-100">WYŚLIJ REZERWACJĘ</button>
                   </div>
                 </motion.div>
               )}
@@ -295,12 +298,12 @@ export default function Home() {
       <section id="contact" className="py-48 px-6">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-32">
           <div>
-            <span className="text-sky-600 font-black tracking-[0.5em] uppercase text-[10px] mb-10 block ml-1">KOMUNIKACJA</span>
+            <span className="text-sky-600 font-black tracking-[0.5em] uppercase text-[10px] mb-10 block ml-1 font-bold text-sky-500">KOMUNIKACJA</span>
             <h2 className="text-6xl md:text-8xl font-outfit font-black text-slate-950 mb-16 tracking-tighter leading-none">KONTAKT.</h2>
 
             <div className="space-y-16">
               <div className="flex gap-8 items-center group cursor-pointer hover:bg-slate-50 p-4 rounded-[40px] transition-all">
-                <div className="w-20 h-20 rounded-[35px] bg-slate-950 text-white flex shrink-0 items-center justify-center shadow-xl group-hover:bg-sky-600 transition-colors"><Phone size={32} /></div>
+                <div className="w-20 h-20 rounded-[35px] bg-slate-900 text-white flex shrink-0 items-center justify-center shadow-xl group-hover:bg-sky-600 transition-colors"><Phone size={32} /></div>
                 <div>
                   <p className="text-[11px] text-slate-400 font-black uppercase tracking-[0.3em] mb-2">INFOLINIA 24/7</p>
                   <p className="text-4xl font-black text-slate-900">+48 607 241 090</p>
@@ -324,7 +327,7 @@ export default function Home() {
           </div>
 
           <div className="relative h-[800px] rounded-[70px] overflow-hidden shadow-2xl">
-            <Image src="/images/real_night.jpg" fill alt="Giżycko Nocą Helipad" className="object-cover" />
+            <Image src={getImagePath("/images/real_night.jpg")} fill alt="Giżycko Nocą Helipad" className="object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 flex items-end p-16">
               <div className="text-white">
                 <p className="text-sky-300 font-black text-[11px] tracking-[0.4em] uppercase mb-6">EPGH SYSTEM • 2026</p>
