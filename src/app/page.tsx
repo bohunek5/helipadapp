@@ -81,7 +81,7 @@ export default function Home() {
   const [mobileMenu, setMobileMenu] = useState(false);
   const t = translations[lang];
 
-  // Bulletproof Theme Sync
+  // Theme Sync Logic
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme') as "light" | "dark";
     if (savedTheme) {
@@ -123,18 +123,20 @@ export default function Home() {
   return (
     <main ref={containerRef} className="flex flex-col bg-white dark:bg-slate-950 transition-colors duration-500 overflow-x-hidden min-h-screen">
 
-      {/* --- PREMIUM NAVBAR (BLOCK-STYLE LINKS FOR MAX VISIBILITY) --- */}
+      {/* --- PREMIUM NAVBAR --- */}
       <nav className="fixed top-0 w-full z-[100] px-4 md:px-12 py-4 flex justify-between items-center frost-glass shadow-2xl border-b border-slate-200 dark:border-slate-800">
-        <a href="/helipadapp/" className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-sky-600 shadow-xl flex items-center justify-center font-black text-white text-lg ring-2 ring-sky-400">H</div>
-          <div className="flex flex-col">
-            {/* Logo Text - GUARANTEED BLACK IN LIGHT MODE */}
-            <span className="font-outfit font-black text-xl leading-none tracking-tight text-slate-950 dark:text-white">HELIPAD</span>
-            <span className="text-[9px] font-black tracking-[0.2em] text-sky-600 uppercase leading-none mt-1">GIŻYCKO • EPGH</span>
+        <a href="/helipadapp/" className="flex items-center gap-4">
+          <div className="relative h-12 w-32 md:w-48 transition-all hover:scale-105 active:scale-95 duration-300">
+            <Image
+              src={getImagePath("/images/logo_official.png")}
+              alt="Helipad Mazury Logo"
+              fill
+              className={`object-contain transition-all duration-500 ${theme === 'light' ? 'invert brightness-0' : ''}`}
+            />
           </div>
         </a>
 
-        {/* Desktop Links - REDESIGNED AS "BLOCKS" / PILL BUTTONS */}
+        {/* Desktop Links - "BLOCK" PILL BUTTONS */}
         <div className="hidden lg:flex gap-4 text-[10px] font-black tracking-widest">
           {t.nav.map((item, i) => (
             <a key={i} href={`#${["home", "about", "services", "gallery", "contact"][i]}`}
@@ -349,8 +351,14 @@ export default function Home() {
       <footer className="py-32 bg-slate-950 px-6 border-t-8 border-slate-950 shadow-[0_-20px_50px_rgba(0,0,0,0.5)]">
         <div className="max-w-7xl mx-auto flex flex-col items-center text-center">
           <div className="flex items-center gap-4 mb-16">
-            <div className="w-14 h-14 rounded-2xl bg-sky-600 flex items-center justify-center font-black text-white text-2xl shadow-xl">H</div>
-            <span className="font-outfit font-black text-4xl text-white tracking-tighter">HELIPAD</span>
+            <div className="relative h-10 w-24">
+              <Image
+                src={getImagePath("/images/logo_official.png")}
+                fill
+                alt="Logo Footer"
+                className="object-contain"
+              />
+            </div>
           </div>
 
           <p className="text-slate-400 text-lg md:text-xl font-bold mb-16 max-w-lg mx-auto uppercase tracking-widest leading-relaxed">
