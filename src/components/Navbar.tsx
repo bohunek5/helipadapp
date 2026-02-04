@@ -72,7 +72,7 @@ export default function Navbar() {
                             alt="Helipad Mazury Logo"
                             width={128}
                             height={40}
-                            className="h-full w-auto object-contain transition-all duration-300"
+                            className="h-full w-auto object-contain invert transition-all duration-300"
                         />
                     </Link>
                     <div className="hidden md:flex flex-col border-l border-slate-300 pl-4">
