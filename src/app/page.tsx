@@ -345,7 +345,7 @@ export default function Home() {
       </section>
 
       {/* --- PRICING --- */}
-      <section id="services" className="py-48 bg-slate-50 dark:bg-slate-900/40 transition-colors duration-500">
+      <section id="services" className="py-48 bg-white dark:bg-slate-900/40 transition-colors duration-500">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-32">
             <span className="text-sky-600 font-black tracking-[0.5em] uppercase text-xs mb-10 block">{t.pricing_title}</span>

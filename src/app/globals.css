@@ -9,6 +9,7 @@
   --titanium: #334155;
   --frost: rgba(255, 255, 255, 0.75);
   --nav-text: #0369a1;
+  color-scheme: light;
 }
 
 .dark {
@@ -20,6 +21,7 @@
   --titanium: #e2e8f0;
   --frost: rgba(2, 6, 23, 0.7);
   --nav-text: #f8fafc;
+  color-scheme: dark;
 }
 
 body {
