@@ -57,6 +57,7 @@ export default function GalleryPage() {
                         onClick={() => setSelectedImage(null)}
                     >
                         <button
+                            title="Close Fullscreen"
                             className="absolute top-6 right-6 p-2 bg-white/10 rounded-full text-white hover:bg-red-500 transition-colors z-50"
                         >
                             <X size={24} />
