@@ -89,8 +89,8 @@ export default function Home() {
               HELIPAD <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-600 to-sky-400">MAZURY</span>
             </motion.h1>
 
-            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="font-mono text-slate-600 dark:text-slate-400 text-sm md:text-lg tracking-[0.2em] mb-12 uppercase">
-              {t.hero_subtitle} <span className="text-sky-500 mx-2">{"//"}</span> EPGH
+            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="font-mono text-slate-600 dark:text-slate-400 text-sm md:text-xl tracking-[0.2em] mb-12 uppercase font-bold">
+              LĄDOWISKO DLA ŚMIGŁOWCÓW
             </motion.p>
 
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7 }} className="flex flex-col sm:flex-row gap-6 justify-center">
@@ -103,15 +103,7 @@ export default function Home() {
             </motion.div>
           </div>
 
-          {/* Bottom Data Ticker */}
-          <div className="absolute bottom-10 left-0 w-full border-t border-slate-200 dark:border-white/10 py-4 overflow-hidden bg-white/50 dark:bg-black/50 backdrop-blur-md">
-            <div className="flex justify-center gap-12 font-mono text-[10px] text-slate-500 dark:text-slate-400 tracking-widest uppercase animate-pulse-slow">
-              <span>LAT: 54°02&apos;05&quot;N</span>
-              <span>LON: 21°47&apos;59&quot;E</span>
-              <span>ALT: 406 FT</span>
-              <span>RADIO: 118.775 MHz</span>
-            </div>
-          </div>
+          {/* Bottom Data Ticker Removed - Moved to Footer */}
         </section>
 
         {/* --- TEASER: BENTO GRID SPECS (Modified for Teaser) --- */}
@@ -128,6 +120,6 @@ export default function Home() {
         </section>
 
       </main>
-    </PageTransition>
+    </PageTransition >
   );
 }

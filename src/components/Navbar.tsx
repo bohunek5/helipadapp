@@ -50,6 +50,7 @@ export default function Navbar() {
     useEffect(() => {
         if (typeof window !== 'undefined') {
             const savedLang = localStorage.getItem('lang') as "pl" | "en" | "de";
+            // eslint-disable-next-line react-hooks/set-state-in-effect
             if (savedLang) setLang((prev) => savedLang !== prev ? savedLang : prev);
         }
     }, []);
