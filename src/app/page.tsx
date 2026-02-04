@@ -2,10 +2,10 @@
 
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import {
-  Shield, Thermometer, MapPin, Compass, Waves,
-  Wind, ArrowRight, CheckCircle2, Phone, Mail,
+  MapPin, Compass,
+  ArrowRight, Phone, Mail,
   Radio, Navigation, Maximize, Ruler, CloudSun,
-  Layers, Users, Calendar, Clock, Send, Menu, X, Sun, Moon, Globe
+  Layers, Clock, Menu, X, Sun, Moon
 } from "lucide-react";
 import Image from "next/image";
 import { useRef, useState, useEffect } from "react";
@@ -19,14 +19,14 @@ const translations = {
     nav: ["START", "O NAS", "CENNIK", "GALERIA", "KONTAKT"],
     cta: "REZERWUJ",
     hero_badge: "MAZURSKI AEROTERMINAL 2026",
-    hero_title: "MAZURY Z LOTU",
-    hero_title_accent: "PTAKA",
+    hero_title: "HELIPAD MAZURY",
+    hero_title_accent: "LĄDOWISKO DLA ŚMIGŁOWCÓW",
     hero_desc: "Najbardziej zaawansowana infrastruktura lotnicza w Giżycku. Bezpośrednie połączenie i standard bezpieczeństwa jutra.",
     hero_btn: "ZAREZERWUJ SLOT",
     hero_specs: "SPECYFIKACJA EPGH",
     specs: ["ZNAK WYWOŁAWCZY", "CZĘSTOTLIWOŚĆ", "WSPÓŁRZĘDNE", "FATO", "ELEWACJA", "KIERUNKI"],
     about_title: "PIONIERZY MAZUR.",
-    about_desc: "Mazury Helipad w Giżycku to profesjonalnie przygotowane lądowisko EPGH. Położenie przy obwodnicy Giżycka gwarantuje szybki transfer w 5 minut.",
+    about_desc: "Mazury Helipad w Giżycku to profesjonalnie przygotowane lądowisko EPGH. Gwarantujemy szybki transfer i najwyższą jakość obsługi.",
     pricing_title: "NASZA OFERTA.",
     pricing_btn: "WYBIERZ TERMIN",
     booking_title: "REZERWUJ.",
@@ -38,14 +38,14 @@ const translations = {
     nav: ["HOME", "ABOUT", "PRICE", "GALLERY", "CONTACT"],
     cta: "BOOK NOW",
     hero_badge: "MAZURY AEROTERMINAL 2026",
-    hero_title: "MAZURY FROM",
-    hero_title_accent: "ABOVE",
+    hero_title: "HELIPAD MAZURY",
+    hero_title_accent: "HELICOPTER LANDING",
     hero_desc: "The most advanced aviation infrastructure in Giżycko. Direct connectivity and the safety standards of tomorrow.",
     hero_btn: "RESERVE SLOT",
     hero_specs: "EPGH SPECS",
     specs: ["CALLSIGN", "FREQUENCY", "COORDINATES", "FATO", "ELEVATION", "RUNWAYS"],
     about_title: "MAZURY PIONEERS.",
-    about_desc: "Mazury Helipad in Giżycko is a professionally prepared EPGH landing spot. Location by the bypass guarantees 5-min transfer.",
+    about_desc: "Mazury Helipad in Giżycko is a professionally prepared EPGH landing spot. We guarantee fast transfer and highest service quality.",
     pricing_title: "OUR OFFER.",
     pricing_btn: "SELECT SLOT",
     booking_title: "RESERVE.",
@@ -57,14 +57,14 @@ const translations = {
     nav: ["START", "ÜBER UNS", "PREISE", "GALERIE", "KONTAKT"],
     cta: "RESERVIEREN",
     hero_badge: "MASUREN AEROTERMINAL 2026",
-    hero_title: "MASUREN VON",
-    hero_title_accent: "OBEN",
+    hero_title: "HELIPAD MASUREN",
+    hero_title_accent: "HUBSCHRAUBERLANDEPLATZ",
     hero_desc: "Die fortschrittlichste Luftfahrtinfrastruktur in Lötzen. Direkte Anbindung und Sicherheitsstandards von morgen.",
     hero_btn: "SLOT BUCHEN",
     hero_specs: "EPGH SPECS",
     specs: ["RUFZEICHEN", "FREQUENZ", "KOORDINATEN", "FATO", "HÖHE", "RICHTUNG"],
     about_title: "MASUREN PIONIERE.",
-    about_desc: "Mazury Helipad in Giżycko ist ein professionell vorbereiteter EPGH-Landeplatz. Die Lage garantiert 5-Min-Transfer.",
+    about_desc: "Mazury Helipad in Giżycko ist ein professionell vorbereiteter EPGH-Landeplatz. Wir garantieren schnellen Transfer und höchste Servicequalität.",
     pricing_title: "UNSER ANGEBOT.",
     pricing_btn: "TERMIN WÄHLEN",
     booking_title: "BUCHEN.",
@@ -76,20 +76,20 @@ const translations = {
 
 export default function Home() {
   const containerRef = useRef(null);
-  const [lang, setLang] = useState<"pl" | "en" | "de">("pl");
-  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [lang, setLang] = useState<"pl" | "en" | "de">(() => {
+    if (typeof window !== 'undefined') {
+      return (localStorage.getItem('lang') as "pl" | "en" | "de") || "pl";
+    }
+    return "pl";
+  });
+  const [theme, setTheme] = useState<"light" | "dark">(() => {
+    if (typeof window !== 'undefined') {
+      return (localStorage.getItem('theme') as "light" | "dark") || "light";
+    }
+    return "light";
+  });
   const [mobileMenu, setMobileMenu] = useState(false);
   const t = translations[lang];
-
-  // Theme Sync Logic
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') as "light" | "dark";
-    if (savedTheme) {
-      setTheme(savedTheme);
-      document.documentElement.classList.toggle('dark', savedTheme === 'dark');
-      document.documentElement.setAttribute('data-theme', savedTheme);
-    }
-  }, []);
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', theme === 'dark');
@@ -124,23 +124,23 @@ export default function Home() {
     <main ref={containerRef} className="flex flex-col bg-white dark:bg-slate-950 transition-colors duration-500 overflow-x-hidden min-h-screen">
 
       {/* --- PREMIUM NAVBAR --- */}
-      <nav className="fixed top-0 w-full z-[100] px-4 md:px-12 py-4 flex justify-between items-center frost-glass shadow-2xl border-b border-slate-200 dark:border-slate-800">
-        <a href="/helipadapp/" className="flex items-center gap-4">
-          <div className="relative h-12 w-32 md:w-48 transition-all hover:scale-105 active:scale-95 duration-300">
+      <nav className="fixed top-0 w-full z-[100] px-4 md:px-12 py-4 flex justify-between items-center frost-glass shadow-2xl border-b border-slate-200/50 dark:border-slate-800/50">
+        <a href="/helipadapp/" aria-label="Helipad Mazury Home" className="flex items-center gap-4">
+          <div className="relative h-12 w-32 md:w-48 transition-all hover:scale-110 active:scale-95 duration-300">
             <Image
               src={getImagePath("/images/logo_official.png")}
               alt="Helipad Mazury Logo"
               fill
-              className={`object-contain transition-all duration-500 ${theme === 'light' ? 'invert brightness-0' : ''}`}
+              className={`object-contain transition-all duration-500 ${theme === 'light' ? 'brightness-0' : 'brightness-0 invert'}`}
             />
           </div>
         </a>
 
-        {/* Desktop Links - "BLOCK" PILL BUTTONS */}
-        <div className="hidden lg:flex gap-4 text-[10px] font-black tracking-widest">
+        {/* Desktop Links */}
+        <div className="hidden lg:flex gap-4 text-[11px] font-black tracking-widest">
           {t.nav.map((item, i) => (
             <a key={i} href={`#${["home", "about", "services", "gallery", "contact"][i]}`}
-              className="px-6 py-2.5 rounded-full bg-slate-100 dark:bg-slate-900 text-sky-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:bg-sky-600 hover:text-white hover:border-sky-600 dark:hover:bg-sky-600 dark:hover:text-white transition-all shadow-sm">
+              className="px-6 py-2.5 rounded-full bg-slate-100/80 dark:bg-slate-900/80 text-sky-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:bg-sky-600 hover:text-white hover:border-sky-600 dark:hover:bg-sky-600 dark:hover:text-white transition-all shadow-sm">
               {item}
             </a>
           ))}
@@ -152,20 +152,94 @@ export default function Home() {
             <button onClick={() => setLang("en")} className={`w-8 h-8 rounded-full text-[10px] font-black transition-all ${lang === 'en' ? 'bg-white dark:bg-slate-800 shadow-md text-sky-600' : 'text-slate-400 dark:text-slate-500 hover:text-sky-600'}`}>EN</button>
             <button onClick={() => setLang("de")} className={`w-8 h-8 rounded-full text-[10px] font-black transition-all ${lang === 'de' ? 'bg-white dark:bg-slate-800 shadow-md text-sky-600' : 'text-slate-400 dark:text-slate-500 hover:text-sky-600'}`}>DE</button>
             <div className="w-[1px] h-4 bg-slate-200 dark:bg-slate-700 mx-1"></div>
-            <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')} className="w-8 h-8 rounded-full flex items-center justify-center hover:bg-white dark:hover:bg-slate-800 transition-all text-slate-900 dark:text-amber-400">
+            <button
+              onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+              aria-label="Toggle Theme"
+              title="Toggle Theme"
+              className="w-8 h-8 rounded-full flex items-center justify-center hover:bg-white dark:hover:bg-slate-800 transition-all text-slate-900 dark:text-amber-400"
+            >
               {theme === 'light' ? <Moon size={18} fill="currentColor" /> : <Sun size={18} fill="currentColor" />}
             </button>
           </div>
 
-          <a href="#booking" className="hidden md:flex px-8 py-3.5 rounded-full bg-sky-600 text-white font-black text-[11px] tracking-widest hover:scale-105 hover:bg-slate-950 active:scale-95 transition-all shadow-xl">
+          <a href="#contact" className="hidden md:flex px-8 py-3.5 rounded-full bg-sky-600 text-white font-black text-[11px] tracking-widest hover:scale-105 hover:bg-slate-950 dark:hover:bg-white dark:hover:text-slate-950 active:scale-95 transition-all shadow-xl">
             {t.cta}
           </a>
 
-          <button onClick={() => setMobileMenu(true)} className="lg:hidden p-3 bg-sky-600 rounded-xl text-white shadow-xl">
+          <button
+            onClick={() => setMobileMenu(true)}
+            aria-label="Open Menu"
+            title="Open Menu"
+            className="lg:hidden p-3 bg-sky-600 rounded-xl text-white shadow-xl hover:scale-105 active:scale-95 transition-all"
+          >
             <Menu size={24} />
           </button>
         </div>
       </nav>
+
+      {/* --- MOBILE OVERLAY MENU --- */}
+      <AnimatePresence>
+        {mobileMenu && (
+          <motion.div
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{ type: "spring", damping: 25, stiffness: 200 }}
+            className="fixed inset-0 z-[200] bg-white dark:bg-slate-950 flex flex-col p-8"
+          >
+            <div className="flex justify-between items-center mb-16">
+              <div className="relative h-10 w-24">
+                <Image
+                  src={getImagePath("/images/logo_official.png")}
+                  alt="Logo"
+                  fill
+                  className={`object-contain ${theme === 'light' ? 'brightness-0' : 'brightness-0 invert'}`}
+                />
+              </div>
+              <button onClick={() => setMobileMenu(false)} className="p-3 bg-slate-100 dark:bg-slate-900 rounded-xl text-slate-950 dark:text-white border border-slate-200 dark:border-slate-800">
+                <X size={24} />
+              </button>
+            </div>
+
+            <div className="flex flex-col gap-4 mb-auto">
+              {t.nav.map((item, i) => (
+                <a
+                  key={i}
+                  href={`#${["home", "about", "services", "gallery", "contact"][i]}`}
+                  onClick={() => setMobileMenu(false)}
+                  className="flex items-center justify-between p-6 rounded-[30px] bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 group"
+                >
+                  <span className="text-xl font-black tracking-widest text-slate-900 dark:text-white uppercase">{item}</span>
+                  <div className="w-12 h-12 rounded-2xl bg-sky-100 dark:bg-sky-900/40 text-sky-600 flex items-center justify-center group-hover:bg-sky-600 group-hover:text-white transition-all">
+                    <ArrowRight size={20} />
+                  </div>
+                </a>
+              ))}
+            </div>
+
+            <div className="mt-8 space-y-6">
+              <a
+                href="#contact"
+                onClick={() => setMobileMenu(false)}
+                className="w-full flex items-center justify-between p-8 rounded-[40px] bg-sky-600 text-white font-black tracking-widest uppercase shadow-2xl"
+              >
+                {t.cta} <ArrowRight size={24} />
+              </a>
+
+              <div className="flex justify-between items-center p-6 rounded-[30px] bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                <div className="flex gap-2">
+                  <button onClick={() => setLang("pl")} className={`w-10 h-10 rounded-xl font-black text-xs ${lang === 'pl' ? 'bg-sky-600 text-white' : 'bg-white dark:bg-slate-800 text-slate-400'}`}>PL</button>
+                  <button onClick={() => setLang("en")} className={`w-10 h-10 rounded-xl font-black text-xs ${lang === 'en' ? 'bg-sky-600 text-white' : 'bg-white dark:bg-slate-800 text-slate-400'}`}>EN</button>
+                  <button onClick={() => setLang("de")} className={`w-10 h-10 rounded-xl font-black text-xs ${lang === 'de' ? 'bg-sky-600 text-white' : 'bg-white dark:bg-slate-800 text-slate-400'}`}>DE</button>
+                </div>
+                <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')} className="w-12 h-12 rounded-xl bg-white dark:bg-slate-800 flex items-center justify-center text-slate-900 dark:text-amber-400 border border-slate-200 dark:border-slate-700">
+                  {theme === 'light' ? <Moon size={20} fill="currentColor" /> : <Sun size={20} fill="currentColor" />}
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* --- HERO SECTION --- */}
       <section id="home" className="relative h-screen w-full flex items-center justify-center pt-24 px-6 overflow-hidden">
@@ -177,7 +251,7 @@ export default function Home() {
             className="object-cover hero-mask"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/40 via-transparent to-white dark:to-slate-950 opacity-100 transition-colors duration-700" />
+          <div className={`absolute inset-0 bg-gradient-to-b from-slate-950/40 via-transparent ${theme === 'light' ? 'to-white/90' : 'to-slate-950'} opacity-100 transition-colors duration-700`} />
         </motion.div>
 
         <motion.div
@@ -191,15 +265,15 @@ export default function Home() {
             <span className="w-2.5 h-2.5 rounded-full bg-sky-500 animate-pulse ring-4 ring-sky-500/30"></span>
             <span className="text-[10px] font-black tracking-[0.5em] text-white uppercase drop-shadow-md">{t.hero_badge}</span>
           </div>
-          <h1 className="text-6xl md:text-[140px] font-outfit font-black tracking-tighter leading-[0.85] mb-10 text-white drop-shadow-2xl uppercase">
+          <h1 className="text-6xl md:text-[120px] font-outfit font-black tracking-tighter leading-[0.85] mb-10 text-slate-900 dark:text-white drop-shadow-2xl uppercase transition-colors duration-500">
             {t.hero_title}<br />
             <span className="gradient-text-azure">{t.hero_title_accent}</span>
           </h1>
-          <p className="text-white text-xl md:text-3xl max-w-3xl mx-auto mb-16 font-extrabold leading-relaxed drop-shadow-2xl opacity-100 px-4">
+          <p className="text-slate-800 dark:text-white text-xl md:text-3xl max-w-3xl mx-auto mb-16 font-extrabold leading-relaxed drop-shadow-2xl opacity-100 px-4 transition-colors duration-500">
             {t.hero_desc}
           </p>
           <div className="flex flex-col sm:flex-row gap-8 justify-center items-center px-4">
-            <a href="#booking" className="group w-full sm:w-auto px-14 py-6 bg-sky-600 text-white font-black rounded-full shadow-2xl hover:bg-white hover:text-slate-950 hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-4 text-sm tracking-widest whitespace-nowrap">
+            <a href="#contact" className="group w-full sm:w-auto px-14 py-6 bg-sky-600 text-white font-black rounded-full shadow-2xl hover:bg-white hover:text-slate-950 hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-4 text-sm tracking-widest whitespace-nowrap">
               {t.hero_btn} <ArrowRight size={24} className="group-hover:translate-x-2 transition-transform" />
             </a>
             <a href="#about" className="w-full sm:w-auto px-14 py-6 bg-white/10 backdrop-blur-xl text-white border-4 border-white/40 font-black rounded-full hover:bg-white hover:text-slate-950 hover:scale-105 active:scale-95 transition-all text-sm tracking-widest uppercase">
@@ -251,15 +325,19 @@ export default function Home() {
               {t.about_desc}
             </p>
             <div className="grid sm:grid-cols-2 gap-12">
-              <div className="p-10 bg-slate-50 dark:bg-slate-900 rounded-[50px] border border-slate-200 dark:border-slate-800 transition-all hover:shadow-2xl group">
-                <div className="w-16 h-16 rounded-3xl bg-slate-950 dark:bg-sky-600 text-white flex items-center justify-center mb-8 shadow-xl"><Waves size={32} /></div>
-                <h4 className="font-black text-sm text-slate-950 dark:text-white uppercase mb-4 tracking-widest">{lang === 'pl' ? 'Stolica Żeglarstwa' : 'Sailing Capital'}</h4>
-                <p className="text-slate-600 dark:text-slate-400 text-sm font-bold">Bezpośrednie połączenie z największymi marinami na Mazurach.</p>
+              <div className="p-10 bg-slate-50 dark:bg-slate-900 rounded-[50px] border border-slate-200 dark:border-slate-800 transition-all hover:shadow-2xl group overflow-hidden relative">
+                <Image src={getImagePath("/images/real_fleet.jpg")} alt="Fleet" fill className="object-cover opacity-20 group-hover:opacity-40 transition-opacity" />
+                <div className="relative z-10">
+                  <h4 className="font-black text-sm text-slate-950 dark:text-white uppercase mb-4 tracking-widest">{lang === 'pl' ? 'Stolica Żeglarstwa' : 'Sailing Capital'}</h4>
+                  <p className="text-slate-600 dark:text-slate-400 text-sm font-bold">Bezpośrednie połączenie z największymi marinami na Mazurach.</p>
+                </div>
               </div>
-              <div className="p-10 bg-slate-50 dark:bg-slate-900 rounded-[50px] border border-slate-200 dark:border-slate-800 transition-all hover:shadow-2xl group">
-                <div className="w-16 h-16 rounded-3xl bg-sky-500 text-white flex items-center justify-center mb-8 shadow-xl"><Thermometer size={32} /></div>
-                <h4 className="font-black text-sm text-slate-950 dark:text-white uppercase mb-4 tracking-widest">{lang === 'pl' ? 'Ogrzewany Hangar' : 'Heated Hangar'}</h4>
-                <p className="text-slate-600 dark:text-slate-400 text-sm font-bold">Najbezpieczniejsza przystań dla Twojego helikoptera w regionie.</p>
+              <div className="p-10 bg-slate-50 dark:bg-slate-900 rounded-[50px] border border-slate-200 dark:border-slate-800 transition-all hover:shadow-2xl group overflow-hidden relative">
+                <Image src={getImagePath("/images/real_hangar.jpg")} alt="Hangar" fill className="object-cover opacity-20 group-hover:opacity-40 transition-opacity" />
+                <div className="relative z-10">
+                  <h4 className="font-black text-sm text-slate-950 dark:text-white uppercase mb-4 tracking-widest">{lang === 'pl' ? 'Ogrzewany Hangar' : 'Heated Hangar'}</h4>
+                  <p className="text-slate-600 dark:text-slate-400 text-sm font-bold">Najbezpieczniejsza przystań dla Twojego helikoptera w regionie.</p>
+                </div>
               </div>
             </div>
           </div>
@@ -300,6 +378,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto rounded-[80px] overflow-hidden shadow-2xl border-8 border-white dark:border-slate-900 relative h-[700px]">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14695.275988581699!2d21.7915!3d54.0322!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46e1008734e5672b%3A0xe6734e5672b4e5b!2sHelipad%20Mazury!5e0!3m2!1spl!2spl!4v1700000000000!5m2!1spl!2spl"
+            title="Helipad Mazury Location Map"
             className="absolute inset-0 w-full h-full grayscale-[0.2] contrast-[1.1]"
             style={{ border: 0 }} loading="lazy"></iframe>
           <div className="absolute top-12 left-12 frost-glass p-12 rounded-[50px] shadow-2xl border-2 border-white/50 max-w-sm pointer-events-none">
@@ -311,32 +390,28 @@ export default function Home() {
       </section>
 
       {/* --- CONTACT SECTION --- */}
-      <section id="contact" className="py-48 px-6 bg-white dark:bg-slate-950 transition-colors duration-500">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-32 items-center">
-          <div>
+      <section id="contact" className="py-24 px-6 bg-white dark:bg-slate-950 transition-colors duration-500">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-24">
             <span className="text-sky-600 font-black tracking-[0.8em] uppercase text-xs mb-12 block">KONTAKT</span>
-            <h2 className="text-7xl md:text-[120px] font-outfit font-black text-slate-950 dark:text-white mb-20 tracking-tighter leading-none uppercase">GIŻYCKO <span className="gradient-text-azure">EPGH.</span></h2>
-
-            <div className="space-y-16">
-              <div className="flex gap-12 items-center group cursor-pointer p-8 rounded-[50px] transition-all hover:bg-slate-50 dark:hover:bg-slate-900 border border-transparent hover:border-slate-100 dark:hover:border-slate-800">
-                <div className="w-24 h-24 rounded-[40px] bg-slate-950 dark:bg-sky-600 text-white transition-all group-hover:bg-sky-600 flex shrink-0 items-center justify-center shadow-2xl"><Phone size={36} /></div>
-                <div>
-                  <p className="text-[14px] text-slate-400 font-black uppercase tracking-[0.5em] mb-3">INFOLINIA LOTNICZA</p>
-                  <p className="text-4xl md:text-5xl font-black text-slate-950 dark:text-white">+48 607 241 090</p>
-                </div>
-              </div>
-              <div className="flex gap-12 items-center group cursor-pointer p-8 rounded-[50px] transition-all hover:bg-slate-50 dark:hover:bg-slate-900 border border-transparent hover:border-slate-100 dark:hover:border-slate-800">
-                <div className="w-24 h-24 rounded-[40px] bg-sky-500 text-white transition-all group-hover:bg-slate-950 flex shrink-0 items-center justify-center shadow-2xl"><Mail size={36} /></div>
-                <div>
-                  <p className="text-[14px] text-slate-400 font-black uppercase tracking-[0.5em] mb-3">OPERACJE EPGH</p>
-                  <p className="text-3xl md:text-4xl font-black text-slate-950 dark:text-white break-all underline decoration-sky-500 decoration-8 underline-offset-[20px]">biuro@helipadmazury.pl</p>
-                </div>
-              </div>
-            </div>
+            <h2 className="text-7xl md:text-[120px] font-outfit font-black text-slate-950 dark:text-white mb-10 tracking-tighter leading-none uppercase">GIŻYCKO <span className="gradient-text-azure">EPGH.</span></h2>
           </div>
 
-          <div className="relative h-[850px] rounded-[80px] overflow-hidden shadow-2xl border-8 border-white dark:border-slate-900 group">
-            <Image src={getImagePath("/images/real_night.jpg")} fill alt="Giżycko Night Helipad" className="object-cover group-hover:scale-110 transition-transform duration-[4s]" />
+          <div className="grid lg:grid-cols-2 gap-8 mb-24">
+            <a href="tel:+48607241090" className="flex flex-col items-center justify-center p-16 rounded-[60px] bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:shadow-2xl hover:scale-[1.02] transition-all group">
+              <div className="w-20 h-20 rounded-3xl bg-sky-600 text-white flex items-center justify-center mb-8 shadow-lg group-hover:rotate-12 transition-transform"><Phone size={32} /></div>
+              <p className="text-xs font-black tracking-[0.4em] text-slate-400 mb-4 uppercase">NUMER TELEFONU</p>
+              <p className="text-4xl md:text-6xl font-black text-slate-950 dark:text-white group-hover:text-sky-600 transition-colors">+48 607 241 090</p>
+            </a>
+            <a href="mailto:biuro@helipadmazury.pl" className="flex flex-col items-center justify-center p-16 rounded-[60px] bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:shadow-2xl hover:scale-[1.02] transition-all group">
+              <div className="w-20 h-20 rounded-3xl bg-slate-950 dark:bg-white text-white dark:text-slate-950 flex items-center justify-center mb-8 shadow-lg group-hover:-rotate-12 transition-transform"><Mail size={32} /></div>
+              <p className="text-xs font-black tracking-[0.4em] text-slate-400 mb-4 uppercase">MAIL</p>
+              <p className="text-3xl md:text-5xl font-black text-slate-950 dark:text-white group-hover:text-sky-600 transition-colors break-all">biuro@helipadmazury.pl</p>
+            </a>
+          </div>
+
+          <div className="relative h-[600px] rounded-[80px] overflow-hidden shadow-2xl border-8 border-white dark:border-slate-900 group">
+            <Image src={getImagePath("/images/real_night.jpg")} fill alt="Giżycko Night Helipad Aerial View" className="object-cover group-hover:scale-110 transition-transform duration-[4s]" />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent p-20 flex flex-col justify-end">
               <div className="translate-y-10 group-hover:translate-y-0 transition-transform duration-[1.5s]">
                 <div className="inline-flex items-center gap-4 px-6 py-3 rounded-full bg-sky-600 text-white font-black text-[12px] tracking-widest uppercase mb-12 shadow-2xl ring-4 ring-sky-500/30">OPEN 24/7</div>
@@ -356,7 +431,7 @@ export default function Home() {
                 src={getImagePath("/images/logo_official.png")}
                 fill
                 alt="Logo Footer"
-                className="object-contain"
+                className="object-contain brightness-0 invert"
               />
             </div>
           </div>
@@ -364,13 +439,6 @@ export default function Home() {
           <p className="text-slate-400 text-lg md:text-xl font-bold mb-16 max-w-lg mx-auto uppercase tracking-widest leading-relaxed">
             {t.footer_desc}
           </p>
-
-          <div className="flex flex-wrap justify-center gap-12 md:gap-20 mb-20 text-[13px] font-black tracking-[0.4em] text-white">
-            <a href="#" className="hover:text-sky-600 transition-colors uppercase">Operations</a>
-            <a href="#" className="hover:text-sky-600 transition-colors uppercase">Technical</a>
-            <a href="#" className="hover:text-sky-600 transition-colors uppercase">Security</a>
-            <a href="#" className="hover:text-sky-600 transition-colors uppercase">Safety</a>
-          </div>
 
           <div className="w-full max-w-sm h-1 bg-slate-900 mb-16 rounded-full"></div>
 

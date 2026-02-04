@@ -2,17 +2,15 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #0f172a;
+  --foreground: #020617;
   --primary: #0ea5e9;
   --primary-glow: rgba(14, 165, 233, 0.2);
   --secondary: #64748b;
   --titanium: #334155;
-  --frost: rgba(255, 255, 255, 0.85);
-  --nav-text: #0ea5e9;
-  /* Sky-600 Blue as requested for light mode nav */
+  --frost: rgba(255, 255, 255, 0.75);
+  --nav-text: #0369a1;
 }
 
-/* Use .dark class to sync with Tailwind's dark: mode */
 .dark {
   --background: #020617;
   --foreground: #f8fafc;
@@ -20,9 +18,8 @@
   --primary-glow: rgba(56, 189, 248, 0.15);
   --secondary: #94a3b8;
   --titanium: #e2e8f0;
-  --frost: rgba(15, 23, 42, 0.9);
+  --frost: rgba(2, 6, 23, 0.7);
   --nav-text: #f8fafc;
-  /* White for dark mode nav */
 }
 
 body {
@@ -38,10 +35,12 @@ body {
     @apply backdrop-blur-3xl border;
     background: var(--frost);
     border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
   }
 
   .dark .frost-glass {
-    @apply border-white/5;
+    border-color: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5), 0 4px 6px -4px rgba(0, 0, 0, 0.5);
   }
 
   .nav-link {
@@ -81,6 +80,7 @@ body {
 }
 
 .hero-mask {
+  -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
   mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
 }
 
