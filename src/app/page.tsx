@@ -251,7 +251,7 @@ export default function Home() {
             className="object-cover hero-mask"
             priority
           />
-          <div className={`absolute inset-0 bg-gradient-to-b from-slate-950/40 via-transparent ${theme === 'light' ? 'to-white/90' : 'to-slate-950'} opacity-100 transition-colors duration-700`} />
+          <div className={`absolute inset-0 bg-gradient-to-b ${theme === 'light' ? 'from-white/60 via-transparent to-white/90' : 'from-slate-950/60 via-transparent to-slate-950'} opacity-100 transition-colors duration-700`} />
         </motion.div>
 
         <motion.div
@@ -423,7 +423,7 @@ export default function Home() {
       </section>
 
       {/* --- FOOTER --- */}
-      <footer className="py-32 bg-slate-950 px-6 border-t-8 border-slate-950 shadow-[0_-20px_50px_rgba(0,0,0,0.5)]">
+      <footer className="py-32 bg-slate-50 dark:bg-slate-950 px-6 border-t-8 border-slate-200 dark:border-slate-950 shadow-[0_-20px_50px_rgba(0,0,0,0.1)] dark:shadow-[0_-20px_50px_rgba(0,0,0,0.5)] transition-colors duration-500">
         <div className="max-w-7xl mx-auto flex flex-col items-center text-center">
           <div className="flex items-center gap-4 mb-16">
             <div className="relative h-10 w-24">
@@ -431,18 +431,18 @@ export default function Home() {
                 src={getImagePath("/images/logo_official.png")}
                 fill
                 alt="Logo Footer"
-                className="object-contain brightness-0 invert"
+                className={`object-contain transition-all duration-500 ${theme === 'light' ? 'brightness-0' : 'brightness-0 invert'}`}
               />
             </div>
           </div>
 
-          <p className="text-slate-400 text-lg md:text-xl font-bold mb-16 max-w-lg mx-auto uppercase tracking-widest leading-relaxed">
+          <p className="text-slate-600 dark:text-slate-400 text-lg md:text-xl font-bold mb-16 max-w-lg mx-auto uppercase tracking-widest leading-relaxed">
             {t.footer_desc}
           </p>
 
-          <div className="w-full max-w-sm h-1 bg-slate-900 mb-16 rounded-full"></div>
+          <div className="w-full max-w-sm h-1 bg-slate-200 dark:bg-slate-900 mb-16 rounded-full"></div>
 
-          <p className="text-[12px] font-black tracking-[0.8em] text-slate-700 uppercase mb-4">© 2026 HELIPAD GIŻYCKO • FUTURE READY MASTERPIECE</p>
+          <p className="text-[12px] font-black tracking-[0.8em] text-slate-400 dark:text-slate-700 uppercase mb-4">© 2026 HELIPAD GIŻYCKO • FUTURE READY MASTERPIECE</p>
         </div>
       </footer>
     </main>
