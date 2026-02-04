@@ -13,24 +13,24 @@ export default function AboutPage() {
                 </h1>
 
                 <div className="grid md:grid-cols-2 gap-16 items-start">
-                    <div className="space-y-6 text-slate-600 dark:text-slate-400 font-mono leading-relaxed">
-                        <p>
+                    <div className="space-y-6 font-mono leading-relaxed bg-slate-50 dark:bg-slate-900/50 p-8 rounded-2xl border border-slate-200 dark:border-white/10 shadow-sm">
+                        <p className="text-slate-700 dark:text-slate-300">
                             Helipad Mazury to nie tylko lądowisko, to zaawansowane centrum operacyjne stworzone z pasji do lotnictwa. Naszą misją jest zapewnienie najwyższych standardów bezpieczeństwa i komfortu dla pilotów śmigłowcowych.
                         </p>
-                        <p>
+                        <p className="text-slate-700 dark:text-slate-300">
                             Zlokalizowani w sercu Mazur, oferujemy strategiczny punkt dostępu do regionu, wyposażony w nowoczesną infrastrukturę, systemy nawigacyjne i zaplecze techniczne.
                         </p>
 
                         <div className="mt-8 grid grid-cols-2 gap-4">
-                            <div className="p-6 bg-slate-100 dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-white/10">
-                                <ShieldCheck className="text-sky-500 mb-4" size={32} />
-                                <h3 className="font-space font-bold text-slate-900 dark:text-white text-lg">BEZPIECZEŃSTWO</h3>
-                                <p className="text-xs mt-2 opacity-70">Certyfikowane procedury operacyjne.</p>
+                            <div className="p-4 bg-white dark:bg-slate-950 rounded-xl border border-slate-200 dark:border-white/10">
+                                <ShieldCheck className="text-sky-500 mb-2" size={24} />
+                                <h3 className="font-space font-bold text-slate-900 dark:text-white text-sm">BEZPIECZEŃSTWO</h3>
+                                <p className="text-[10px] mt-1 opacity-70">Certyfikowane procedury.</p>
                             </div>
-                            <div className="p-6 bg-slate-100 dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-white/10">
-                                <Target className="text-amber-500 mb-4" size={32} />
-                                <h3 className="font-space font-bold text-slate-900 dark:text-white text-lg">LOKALIZACJA</h3>
-                                <p className="text-xs mt-2 opacity-70">Idealny punkt startowy na Mazury.</p>
+                            <div className="p-4 bg-white dark:bg-slate-950 rounded-xl border border-slate-200 dark:border-white/10">
+                                <Target className="text-amber-500 mb-2" size={24} />
+                                <h3 className="font-space font-bold text-slate-900 dark:text-white text-sm">LOKALIZACJA</h3>
+                                <p className="text-[10px] mt-1 opacity-70">Serce Mazur.</p>
                             </div>
                         </div>
                     </div>

@@ -48,14 +48,14 @@ export default function Home() {
 
   return (
     <PageTransition>
-      <main ref={containerRef} className="bg-white dark:bg-[#030712] min-h-screen font-inter transition-colors duration-500 overflow-x-hidden selection:bg-sky-500 selection:text-white">
+      <main ref={containerRef} className="min-h-screen font-inter transition-colors duration-500 overflow-x-hidden selection:bg-sky-500 selection:text-white">
 
         {/* --- HUD OVERLAY (Fixed) --- */}
         <div className="fixed inset-0 pointer-events-none z-50 mix-blend-overlay opacity-30 dark:opacity-20 hidden lg:block">
-          <div className="absolute top-10 left-10 w-8 h-8 border-t-2 border-l-2 border-slate-900 dark:border-white/50" />
-          <div className="absolute top-10 right-10 w-8 h-8 border-t-2 border-r-2 border-slate-900 dark:border-white/50" />
-          <div className="absolute bottom-10 left-10 w-8 h-8 border-b-2 border-l-2 border-slate-900 dark:border-white/50" />
-          <div className="absolute bottom-10 right-10 w-8 h-8 border-b-2 border-r-2 border-slate-900 dark:border-white/50" />
+          <div className="absolute top-10 left-10 w-8 h-8 border-t-2 border-l-2" />
+          <div className="absolute top-10 right-10 w-8 h-8 border-t-2 border-r-2" />
+          <div className="absolute bottom-10 left-10 w-8 h-8 border-b-2 border-l-2" />
+          <div className="absolute bottom-10 right-10 w-8 h-8 border-b-2 border-r-2" />
           <div className="absolute top-1/2 left-6 -translate-y-1/2 flex flex-col gap-2">
             {Array.from({ length: 10 }).map((_, i) => (
               <div key={i} className={`h-[2px] bg-slate-900 dark:bg-white/40 ${i % 5 === 0 ? 'w-6' : 'w-3'}`} />
@@ -66,9 +66,10 @@ export default function Home() {
         {/* --- HERO (HUD COCKPIT) --- */}
         <section className="relative h-screen flex items-center justify-center overflow-hidden">
           {/* Parallax Background */}
+          {/* Parallax Background */}
           <motion.div style={{ y: yParallax }} className="absolute inset-0 z-0">
-            <Image src={getImagePath("/images/real_aerial.jpg")} alt="Aerial View" fill className="object-cover opacity-90 dark:opacity-60 saturate-0 dark:saturate-[0.2] contrast-125 transition-all duration-700" priority />
-            <div className="absolute inset-0 bg-gradient-to-t from-white dark:from-[#030712] via-white/50 dark:via-[#030712]/50 to-transparent" />
+            <Image src={getImagePath("/images/real_heli_landing.jpg")} alt="Aerial View" fill className="object-cover opacity-90 dark:opacity-60 transition-all duration-700" priority />
+            <div className="absolute inset-0 bg-gradient-to-t from-white/90 dark:from-[#030712] to-transparent" />
           </motion.div>
 
           {/* HUD Elements */}

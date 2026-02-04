@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, X, Sun, Moon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
@@ -57,7 +58,13 @@ export default function Navbar() {
     }, []);
 
     useEffect(() => {
-        document.documentElement.classList.toggle('dark', theme === 'dark');
+        // Force immediate application
+        const root = document.documentElement;
+        if (theme === 'dark') {
+            root.classList.add('dark');
+        } else {
+            root.classList.remove('dark');
+        }
         localStorage.setItem('theme', theme);
     }, [theme]);
 
@@ -71,10 +78,17 @@ export default function Navbar() {
         <>
             <nav className="fixed top-0 w-full z-[100] px-6 py-4 flex justify-between items-center backdrop-blur-md bg-white/90 dark:bg-[#030712]/90 border-b border-slate-200 dark:border-white/10 transition-colors duration-300">
                 <div className="flex items-center gap-4">
-                    <Link href="/" className="relative w-10 h-10 bg-sky-600 rounded flex items-center justify-center shadow-[0_0_15px_rgba(14,165,233,0.5)] hover:bg-sky-500 transition-colors">
-                        <span className="font-space font-bold text-white tracking-tighter">HM</span>
+                    {/* LOGO: Black in Day, White in Night via filter */}
+                    <Link href="/" className="relative w-32 h-10 flex items-center justify-center">
+                        <Image
+                            src="/helipadapp/images/logo_official.png"
+                            alt="Helipad Mazury Logo"
+                            width={128}
+                            height={40}
+                            className="h-full w-auto object-contain invert dark:invert-0 transition-all duration-300"
+                        />
                     </Link>
-                    <div className="hidden md:flex flex-col">
+                    <div className="hidden md:flex flex-col border-l border-slate-300 dark:border-white/20 pl-4">
                         <span className="font-space font-bold text-sm tracking-[0.2em] text-slate-900 dark:text-white leading-none">HELIPAD</span>
                         <span className="font-mono text-[10px] text-sky-600 dark:text-sky-400 tracking-widest">EPGH SYSTEM</span>
                     </div>

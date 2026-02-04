@@ -5,11 +5,15 @@ import Image from "next/image";
 
 export default function GalleryPage() {
     const images = [
-        "/helipadapp/images/real_aerial.jpg",
         "/helipadapp/images/real_heli_landing.jpg",
+        "/helipadapp/images/real_aerial.jpg",
+        "/helipadapp/images/gizycko_hero_pro.png",
         "/helipadapp/images/real_fleet.jpg",
         "/helipadapp/images/real_hangar.jpg",
-        // Reuse existing images for grid filler if needed, or placeholders if strictly necessary but we have these 4.
+        "/helipadapp/images/real_night.jpg",
+        "/helipadapp/images/helipad_day.png",
+        "/helipadapp/images/hero.png",
+        "/helipadapp/images/mazury_aerial.png"
     ];
 
     return (
@@ -21,12 +25,12 @@ export default function GalleryPage() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {images.map((src, i) => (
-                        <div key={i} className="relative aspect-video rounded-3xl overflow-hidden group border border-slate-200 dark:border-white/10">
+                        <div key={i} className="relative aspect-video rounded-3xl overflow-hidden group border border-slate-200 dark:border-white/10 shadow-lg hover:shadow-sky-500/20 transition-all">
                             <Image
                                 src={src}
                                 alt={`Gallery Image ${i}`}
                                 fill
-                                className="object-cover group-hover:scale-110 transition-transform duration-700 grayscale hover:grayscale-0"
+                                className="object-cover group-hover:scale-105 transition-transform duration-700"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                             <div className="absolute bottom-4 left-4 translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
