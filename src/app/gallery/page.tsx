@@ -7,13 +7,9 @@ export default function GalleryPage() {
     const images = [
         "/helipadapp/images/real_heli_landing.jpg",
         "/helipadapp/images/real_aerial.jpg",
-        "/helipadapp/images/gizycko_hero_pro.png",
         "/helipadapp/images/real_fleet.jpg",
         "/helipadapp/images/real_hangar.jpg",
-        "/helipadapp/images/real_night.jpg",
-        "/helipadapp/images/helipad_day.png",
-        "/helipadapp/images/hero.png",
-        "/helipadapp/images/mazury_aerial.png"
+        "/helipadapp/images/real_night.jpg"
     ];
 
     return (
